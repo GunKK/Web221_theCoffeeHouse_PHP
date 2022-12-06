@@ -6,6 +6,9 @@
 -- Generation Time: Nov 05, 2022 at 02:39 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
+CREATE DATABASE IF NOT EXISTS assignmentWeb;
+
+USE assignmentWeb;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,7 +30,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
   `admin_id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -50,7 +53,7 @@ INSERT INTO `admin` (`admin_id`, `email`, `password`, `name`, `role`, `timestamp
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -72,7 +75,7 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 -- Table structure for table `order`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `payment_method` varchar(50) NOT NULL DEFAULT 'Tiền mặt khi nhận hàng',
@@ -88,7 +91,7 @@ CREATE TABLE `order` (
 -- Table structure for table `order_item`
 --
 
-CREATE TABLE `order_item` (
+CREATE TABLE IF NOT EXISTS `order_item` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity_item` bigint(20) NOT NULL DEFAULT 1,
@@ -101,7 +104,7 @@ CREATE TABLE `order_item` (
 -- Table structure for table `post`
 --
 
-CREATE TABLE `post` (
+CREATE TABLE IF NOT EXISTS `post` (
   `post_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `content` varchar(300) DEFAULT NULL,
@@ -114,7 +117,7 @@ CREATE TABLE `post` (
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -148,7 +151,7 @@ INSERT INTO `product` (`product_id`, `name`, `category_id`, `description`, `imag
 -- Table structure for table `review`
 --
 
-CREATE TABLE `review` (
+CREATE TABLE IF NOT EXISTS `review` (
   `review_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -163,7 +166,7 @@ CREATE TABLE `review` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -193,14 +196,14 @@ ALTER TABLE `category`
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`oder_id`),
+  ADD PRIMARY KEY (`order_id`),
   ADD KEY `FK_order_user` (`user_id`);
 
 --
 -- Indexes for table `order_item`
 --
 ALTER TABLE `order_item`
-  ADD PRIMARY KEY (`oder_id`,`product_id`),
+  ADD PRIMARY KEY (`order_id`,`product_id`),
   ADD KEY `FK_order_item_product` (`product_id`);
 
 --
@@ -250,7 +253,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `oder_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `post`
