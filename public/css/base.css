@@ -1,0 +1,26 @@
+:root {
+    --primary-color: #FFCA2B;
+    --text-color: #999;
+    --white-color: #fff;
+}
+
+.navbar {
+    box-shadow: 0 0 10px var(--text-color) !important;
+}
+
+.primary-item {
+    transition: linear 0.2s;
+    position: relative;
+    right: 0;
+}
+
+.primary-item:hover {
+    color: var(--primary-color) !important;
+    right: -2px;
+}
+
+.text-color-primary:hover {
+    color: var(--primary-color) !important;
+    transition: linear 0.3s;
+}
+
