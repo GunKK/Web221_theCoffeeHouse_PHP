@@ -92,7 +92,7 @@ if ($conn->error) {
     </div>
 </div>
 
-<div class="container-fluid bg-warning bg-opacity-10 mb-5 mt-5 pt-5 pb-5">
+<div class="container-fluid bg-warning bg-opacity-10 pt-5 pb-5">
     <!-- team member -->
     <div class="container mb-5">
         <div class="row text-center mb-2">
@@ -101,37 +101,37 @@ if ($conn->error) {
         <div class="row">
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div class="text-center">
-                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/profile_1913304.jpg" class="rounded-circle mb-3 mt-3" /></a>
+                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/profile1.jpg" class="rounded-circle mb-3 mt-3" /></a>
                     <p class="text-dark">Nguyễn Đức Hậu</p>
-                    <a class="btn btn-primary text-light" href="#">Contact</a>
+                    <!-- <a class="btn btn-primary text-light" href="#">Contact</a> -->
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div class="text-center">
                     <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/logo.jpg" class="rounded-circle mb-3 mt-3" /></a>
                     <p class="text-dark">Trần Thế Quang</p>
-                    <a class="btn btn-primary text-light" href="#">Contact</a>
+                    <!-- <a class="btn btn-primary text-light" href="#">Contact</a> -->
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div class="text-center">
                     <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/logo.jpg" class="rounded-circle mb-3 mt-3" /></a>
                     <p class="text-dark">Võ Trịnh Xuân Nguyên</p>
-                    <a class="btn btn-primary text-light" href="#">Contact</a>
+                    <!-- <a class="btn btn-primary text-light" href="#">Contact</a> -->
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div class="text-center">
-                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/logo.jpg" class="rounded-circle mb-3 mt-3" /></a>
-                    <p class="text-dark">Minh Lý Gia Huy</p>
-                    <a class="btn btn-primary text-light" href="#">Contact</a>
+                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/profile4.jpg" class="rounded-circle mb-3 mt-3" /></a>
+                    <p class="text-dark">Lý Gia Huy</p>
+                    <!-- <a class="btn btn-primary text-light" href="#">Contact</a> -->
                 </div>
             </div>
         </div>
     </div>
 
     <!-- best seller -->
-    <div class="container">
+    <div class="container mb-5">
         <div class="row text-center">
             <div class="h3 text-warning mb-2">BEST SELLER OF THE MONTH</div>
         </div>

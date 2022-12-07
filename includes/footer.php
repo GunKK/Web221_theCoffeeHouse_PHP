@@ -51,7 +51,7 @@
                         <a class="text-color-primary text-light text-decoration-none rounded-circle text-center" target="_blank" href="#"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
                     </li>
                     <li class="list-inline-item text-center">
-                        <a class="text-color-primary text-light text-decoration-none" target="_blank" href="#"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+                        <a class="text-color-primary text-light text-decoration-none" target="_blank" href="https://github.com/GunKK/Web221_theCoffeeHouse_PHP"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
                     </li>
                 </ul>
             </div>
@@ -63,7 +63,7 @@
             <div class="row pt-2">
                 <div class="col-12">
                     <p class="text-center text-light user-select-none">
-                        Copyright &copy; 2022 Group 5 Web
+                        Copyright &copy; <?echo date('Y')?> Web Assignment - Group 5
                     </p>
                 </div>
             </div>

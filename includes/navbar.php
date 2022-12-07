@@ -12,13 +12,16 @@
             <a class="nav-link active" aria-current="page" href="<?php echo $rootPath ?>">Trang chủ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo $rootPath;?>/policy.php">Chính sách</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="<?php echo $rootPath;?>/product.php">Sản phẩm</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo $rootPath;?>/contact.php">Liên hệ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $rootPath;?>/contact.php">Tin tức</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $rootPath;?>/policy.php">Chính sách</a>
           </li>
         </ul>
         <form action="<?php echo $rootPath?>/search.php" method="get" class="d-flex me-3" role="search">
