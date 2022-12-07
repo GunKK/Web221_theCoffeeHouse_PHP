@@ -28,7 +28,7 @@
           </div>
         </form>
         <ul class="nav navbar-nav pull-right">
-          <li class="nav-item">
+          <li class="nav-item me-2">
             <a href="<?php echo $rootPath?>/cart.php" class="btn btn-light">
               <i class="fa-sharp fa-solid fa-bag-shopping"></i>
                 <?php
@@ -53,16 +53,6 @@
             } else {
           ?>
             <li class="nav-item">
-              <!-- <a class="nav-link" href="<?php echo $rootPath?>/customer/my_account.php">
-                <i class="fa-regular fa-user"></i>
-                <?php 
-                  $email = $_SESSION['email_user'];
-                  $sqlUser = "SELECT name FROM user WHERE email = '$email'";
-                  $ketQua = $conn->query($sqlUser);
-                  $user = $ketQua->fetch_array();
-                  echo $user['name'];
-                ?>
-              </a> -->
               <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <?php 

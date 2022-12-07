@@ -63,10 +63,6 @@ if ($conn->error) {
 <!-- end contact page -->
 
 <?php
-    require './includes/modal_login.php'
-?>
-
-<?php
     require './includes/footer.php';
 ?>
 <!-- JavaScript Bundle with Popper -->

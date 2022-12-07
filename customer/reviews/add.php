@@ -14,8 +14,10 @@
         $productId = mysqli_real_escape_string($conn, $_POST['productId']);
         $sqlInsert = "INSERT INTO review (title, content, user_id, product_id) VALUES ('$title', '$content', '$userId', '$productId')";
         $conn->query($sqlInsert);
+        $conn->close();
         header("location: /AssignmentWeb/product.php");
     } else {
+        $conn->close();
         header('location: /AssignmentWeb/404.php');
     }
 ?>

@@ -129,7 +129,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="mx-auto w-25">
+            <div class="col-xl-3 col-md-3 col-sm-6 mx-auto">
                 <a href="<?php echo $rootPath?>/product.php" class="btn btn-primary">Trở về trang sản phẩm</a>
             </div>
         </div>

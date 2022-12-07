@@ -211,7 +211,7 @@ if ($product->num_rows > 0) {
 }
 ?>
 <?php
-    // lấy userId để 
+    // lấy userId hiện tại
     if (isset($_SESSION['email_user']) && !empty($_SESSION['email_user'])) {
         $email = $_SESSION['email_user'];
         $sqlFindUser = "SELECT user_id FROM user WHERE email = '$email'";
@@ -239,7 +239,8 @@ if ($product->num_rows > 0) {
                     <div class="media-body border-bottom border-secondary">
                         <span class="h4"><?=$row['name']?></span> 
                         <?php 
-                            $sqlUserOrder = "SELECT user_id FROM `assignmentweb`.`order`, order_item WHERE user_id = '$userId' AND product_id = '$productId' AND order.order_id = order_item.order_id";
+                            $userIdSelf = $row['user_id'];
+                            $sqlUserOrder = "SELECT user_id FROM `assignmentweb`.`order`, order_item WHERE user_id = '$userIdSelf' AND product_id = '$productId' AND order.order_id = order_item.order_id";
                             $checkBuy = $conn->query($sqlUserOrder);
                             if ($checkBuy->num_rows>0) {
                                 echo '<span class="text-success"><i class="fa-duotone fa-badge-check"></i> Đã mua sản phẩm này</span>';
@@ -248,7 +249,7 @@ if ($product->num_rows > 0) {
                             }
                         ?> 
                         <p class="mt-3 ms-2">
-                            <small><?=$row['title']?></small>
+                            <span class="text-success"><?=$row['title']?></span>:
                             <?=$row['content']?>
                         </p>
                         <p class="ms-2"><i class="fa-light fa-clock"></i> <small><?=$row['times']?></small></p>
@@ -259,7 +260,7 @@ if ($product->num_rows > 0) {
             ?>
                 <div class="ps-3 pe-3 pt-3 pb-3">
                     <button type="button" class="btn btn-primary <?php if(!isset($_SESSION['email_user'])) echo 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#postReview"><i class="fa-sharp fa-solid fa-circle-star"></i> Viết đánh giá</button>
-                    <button class="ms-1 btn btn-outline-primary">Xem đánh giá <i class="fa-light fa-circle-play"></i></button>
+                    <!-- <button class="ms-1 btn btn-outline-primary">Xem đánh giá <i class="fa-light fa-circle-play"></i></button> -->
                     <div class="mt-1">
                         <i><small>(<i class="fa-regular fa-asterisk"></i>) Vui lòng đăng nhập để đánh giá sản phẩm này</small></i>
                     </div>
@@ -279,7 +280,7 @@ if ($product->num_rows > 0) {
         <div class="row">
             <div class="ps-3 pe-3 pt-3 pb-3">
                 <button type="button" class="btn btn-primary <?php if(!isset($_SESSION['email_user'])) echo 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#postReview"><i class="fa-sharp fa-solid fa-circle-star"></i> Viết đánh giá</button>
-                <button class="ms-1 btn btn-outline-primary">Xem đánh giá <i class="fa-light fa-circle-play"></i></button>
+                <!-- <button class="ms-1 btn btn-outline-primary">Xem đánh giá <i class="fa-light fa-circle-play"></i></button> -->
             </div>
         </div>
         <div class="row">

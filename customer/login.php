@@ -41,15 +41,19 @@ if (isset($_POST['login_user'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $hash_password = md5($password);
-    while ($row = $ketqua->fetch_assoc()) {
-        if($row["email"] == $email && $row["password"] == $hash_password) {
-            $_SESSION["email_user"] = $email;
-            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
-              header('location: check_out.php');
-            else
-              header('location: my_account.php');
-        }
-        else $tb = 'Sai email hoặc mật khẩu'; 
+    if ($email =='' || $password =='') {
+      $tb = 'Vui lòng điền các ô còn thiếu';
+    } else {
+      while ($row = $ketqua->fetch_assoc()) {
+          if($row["email"] == $email && $row["password"] == $hash_password) {
+              $_SESSION["email_user"] = $email;
+              if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
+                header('location: check_out.php');
+              else
+                header('location: my_account.php');
+          }
+          else $tb = 'Sai email hoặc mật khẩu'; 
+      }
     }
 }
 ?>
