@@ -18,7 +18,7 @@
             <a class="nav-link" href="<?php echo $rootPath;?>/contact.php">Liên hệ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo $rootPath;?>/contact.php">Tin tức</a>
+            <a class="nav-link" href="<?php echo $rootPath;?>/posts.php">Tin tức</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo $rootPath;?>/policy.php">Chính sách</a>
