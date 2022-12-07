@@ -34,7 +34,7 @@
     $ketQua = $conn->query($sqlFindUser);
     $user = $ketQua->fetch_array();
     $userId = $user['user_id'];
-    $sqlFindOrder = "SELECT order_id, name_receiver, status, address_receiver, payment, update_at  FROM `assignmentweb`.`order`, user WHERE order.user_id = '$userId' AND order.user_id = user.user_id";
+    $sqlFindOrder = "SELECT order_id, name_receiver, status, address_receiver, payment, order.updated_at  FROM `assignmentweb`.`order`, user WHERE order.user_id = '$userId' AND order.user_id = user.user_id";
     $orders = $conn->query($sqlFindOrder);
 
     if ($orders->num_rows>0) {
@@ -68,7 +68,7 @@
                         <td scope="col"><?=$row['address_receiver']?></td>
                         <td scope="col"><?=number_format($row['payment'])?> <sup>đ</sup></td>
                         <td scope="col"><span class="text-danger"><?=$row['status']?></span></td>
-                        <td scope="col"><?=$row['times']?></td>
+                        <td scope="col"><?=$row['updated_at']?></td>
                     </tr>
             <?php
                     $i++;

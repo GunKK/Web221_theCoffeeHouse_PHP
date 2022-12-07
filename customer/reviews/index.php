@@ -74,8 +74,8 @@
                             <span class="d-none d-xl-block d-xxl-none"><?=$row['updated_at']?></span>
                         </td>
                         <td scope="col">
-                            <button type="button" data-bs- class="btn btn-success"><i class="fa-regular fa-wrench"></i></button>
-                            <button type="button" data-bs- class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            <a href="./update.php?id=<?=$row['review_id']?>" data-bs- class="btn btn-success"><i class="fa-regular fa-wrench"></i></a>
+                            <a href="./delete.php?id=<?=$row['review_id']?>" data-bs- class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>
             <?php
@@ -92,7 +92,7 @@
 <div class="container pt-5 pb-5">
     <div class="row mb-2">
         <div class="alert alert-warning">
-            <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có đơn hàng nào!!!</span>
+            <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có đánh giá sản phẩm nào!!!</span>
         </div>
     </div>
     <div class="row">

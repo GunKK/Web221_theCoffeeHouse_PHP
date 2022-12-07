@@ -7,12 +7,12 @@
         die("có lôi xảy ra".$conn->connect_error);
     } 
   
-    if (isset($_GET['delete']) && isset($_GET['id'])) {
+    if (isset($_GET['id'])) {
         settype($_GET['id'], 'int');
         if ($_GET['id'] == 0) header('location: /AssignmentWeb/404.php');
         $reviewId = $_GET['id'];
         $sqlDelete = "DELETE FROM review WHERE review_id = '$reviewId'";
-        $conn->query($sqlInsert);
+        $conn->query($sqlDelete);
         $conn->close();
         header("location: /AssignmentWeb/product.php");
     } else {
