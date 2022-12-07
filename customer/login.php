@@ -8,7 +8,7 @@ if (isset($_SESSION['email_user']) && !empty($_SESSION['email_user'])) {
   else
     header('location: my_account.php');
 }
-  
+
 $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
 if ($conn->connect_error) {
     die("có lôi xảy ra".$conn->connect_error);
@@ -29,14 +29,16 @@ $ketqua = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
 <body>
-<?php
-    require '../includes/header.php ';
+<?php 
+    require '../includes/header.php';
 ?>
 
 <?php
+
 $tb = '';
 $email ='';
 $password ='';
+
 if (isset($_POST['login_user'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
