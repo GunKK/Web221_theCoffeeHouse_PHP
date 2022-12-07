@@ -1,12 +1,15 @@
 <?php
-require_once('db_connnection.php');
-$name = $_POST['name'];
-$description = $_POST['description'];
-$price = $_POST['price'];
+$server = 'localhost';
+$dbname = 'assignmentWeb';
+$user = 'root';
+$pass = '';
+$conn = new mysqli($server, $user, $pass, $dbname);
+$id = $_POST['id'];
+$title = $_POST['title'];
+$content = $_POST['content'];
+$image = $_POST['image'];
 
-
-$conn = OpenCon();
-$query = "UPDATE `products` SET description = '" . $description . "', price = '" . $price . "' WHERE name = '" . $name . "';";
+$query = "UPDATE `post` SET title = '" . $title . "', image = '".$image."', content = '" . $content . "' WHERE post_id=" . $id . ";";
 if ($conn->query($query) === TRUE) {
     echo "Successfully";
     header('Location: index.php');

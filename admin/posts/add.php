@@ -7,7 +7,8 @@ $conn = new mysqli($server, $user, $pass, $dbname);
 
 $title = $_POST['title'];
 $content = $_POST['content'];
-$query = "INSERT INTO `post` (title, content) VALUES ('" . $title . "', '" . $content . "')";
+$image = $_POST['image'];
+$query = "INSERT INTO `post` (title, content, image) VALUES ('" . $title . "', '" . $content . "', '".$image."')";
 
 if ($conn->query($query) === TRUE) {
     echo "New record created successfully";

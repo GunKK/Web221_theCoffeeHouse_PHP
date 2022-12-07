@@ -5,8 +5,12 @@
   // if (!isset($_SESSION["email_ad"])) {
   //     header('location: login.php');
   // }
+  $server = 'localhost';
+  $dbname = 'assignmentWeb';
+  $user = 'root';
+  $pass = '';
+  $conn = new mysqli($server, $user, $pass, $dbname);
 
-  $conn = OpenCon();
   $sqlShowPost = "SELECT * FROM post";
   $posts = $conn->query($sqlShowPost);
 ?>
@@ -48,8 +52,12 @@
                       <input class="form-control my-2" type="text" placeholder="Tiêu đề bài viết" name="title" />
                   </div>
                   <div class="form-group">
+                      <label>Hình ảnh</label>
+                      <input class="form-control my-2" type="text" placeholder="Hình ảnh" name="image" />
+                  </div>
+                  <div class="form-group">
                       <label>Nội dung</label>
-                      <textarea class="form-control my-2" placeholder="Nội dung" name="content" style="height: 100px"></textarea>
+                      <textarea class="form-control my-2" placeholder="Nội dung" name="content" style="height: 200px"></textarea>
                   </div>
               </div>
               <div class="modal-footer">
@@ -65,34 +73,38 @@
     <table class="table table-striped">
       <thead>
         <tr class="table-primary text-center">
-          <th scope="col">ID</th>
+          <th scope="col">STT</th>
           <th scope="col">Tiêu đề</th>
           <th scope="col">Nội dung</th>
+          <th scope="col">Hình ảnh</th>
           <th scope="col">Ngày cập nhật</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <?php
         if ($posts->num_rows>0) {
+          $count = 1;
           while ($row = $posts->fetch_assoc()) {
       ?>
       <tbody>
         <tr>
-          <th class='align-middle' scope="row"><?php echo $row["post_id"]?></th>
+          <th class='align-middle' scope="row"><?php echo $count?></th>
           <td class='align-middle'><?php echo $row["title"]?></td>
           <td class='align-middle'><?php echo $row["content"]?></td>
+          <td class='align-middle'><?php echo $row["image"]?></td>
           <td class='align-middle'><?php echo $row["updated_at"]?></td>
           <td class='align-middle'>    
             <div class="d-inline-flex">
             <!-- <a class="text-decoration-none btn btn-success text-light"><i class="fa-light fa-pen-to-square"></i></a>
             <a class="text-decoration-none btn btn-danger text-light"><i class="fa-light fa-trash-can"></i></a> -->
-            <button type='button' class='btn-edit btn btn-primary m-1' data-bs-title='<?php echo $row['title'] ?>' data-bs-content='<?php echo $row['content'] ?>' data-bs-target='#Edit' data-bs-toggle='modal'><i class="fa-light fa-pen-to-square"></i></button>
+            <button type='button' class='btn-edit btn btn-primary m-1' data-bs-id='<?php echo $row['post_id'] ?>' data-bs-title='<?php echo $row['title'] ?>' data-bs-content='<?php echo $row['content'] ?>' data-bs-image='<?php echo $row['image'] ?>' data-bs-target='#Edit' data-bs-toggle='modal'><i class="fa-light fa-pen-to-square"></i></button>
             <button type='button' class='btn-delete btn btn-danger m-1' data-bs-id='<?php echo $row['post_id'] ?>' data-bs-target='#Delete' data-bs-toggle='modal'><i class="fa-light fa-trash-can"></i></button>
             </div>
           </td>
         </tr>
       </tbody>
       <?php
+              $count++;
           };
         }
       ?>
@@ -103,15 +115,20 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Chỉnh sửa bài viết</h5>
                 </div>
-                <form action="edit.php" method="post">
+                <form action="update.php" method="post">
                     <div class="modal-body">
+                        <input type="hidden" name="id" />
                         <div class="form-group">
                             <label>Tiêu đề bài viết</label>
                             <input class="form-control my-2" type="text" placeholder="Tiêu đề bài viết" name="title"/>
                         </div>
                         <div class="form-group">
+                            <label>Hình ảnh</label>
+                            <input class="form-control my-2" type="text" placeholder="Hình ảnh" name="image"/>
+                        </div>
+                        <div class="form-group">
                             <label>Nội dung</label>
-                            <textarea class="form-control my-2" placeholder="Nội dung" name="content" style="height: 100px"></textarea>
+                            <textarea class="form-control my-2" placeholder="Nội dung" name="content" style="height: 200px"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -151,16 +168,19 @@
 ?>
 <script>
   $(".btn-edit").click(function (e) {
+    const id = this.getAttribute('data-bs-id')
+    $("#Edit input[name='id']").val(id);
     const title = this.getAttribute('data-bs-title')
     $("#Edit input[name='title']").val(title);
     const content = this.getAttribute('data-bs-content')
     $("#Edit textarea[name='content']").val(content);
+    const image = this.getAttribute('data-bs-image')
+    $("#Edit input[name='image']").val(image);
     $('#Edit').modal('show');
 });
 
 $(".btn-delete").click(function (e) {
     const id = this.getAttribute('data-bs-id')
-    console.log("Id=",id);
     $("#Delete input[name='id']").val(id);
     $('#Delete').modal('show');
 });
