@@ -1,6 +1,6 @@
 <?php
-  require_once('db_connection.php');
   session_start();
+  ob_start();
   $rootPath = '/AssignmentWeb/admin';
   // if (!isset($_SESSION["email_ad"])) {
   //     header('location: login.php');
