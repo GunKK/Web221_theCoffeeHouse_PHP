@@ -14,6 +14,7 @@
         $sqlDelete = "DELETE FROM review WHERE review_id = '$reviewId'";
         $conn->query($sqlDelete);
         $conn->close();
+        setcookie('thongBao', 'Đã xóa thành công', time()+5);
         header("location: /AssignmentWeb/product.php");
     } else {
         $conn->close();

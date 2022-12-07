@@ -42,6 +42,15 @@
         <div class="row">
             <div class="h4 text-primary">Danh sách đánh giá</div>
         </div>
+        <?php
+            if (isset($_COOKIE['thongBao']) && $_COOKIE['thongBao']!='') {
+        ?>
+            <div class="row">
+                <div class="alert alert-success"><?=$_COOKIE['thongBao']?></div>
+            </div>
+        <?php
+            }
+        ?>
         <div class="row">
             <table class="table">
                 <thead class="table-warning">
