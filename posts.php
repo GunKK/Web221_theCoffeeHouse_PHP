@@ -28,61 +28,33 @@ if ($conn->error) {
 ?>
 
 <?php
-    $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
-    if (isset($_GET['categoryId'])) {
-        settype($_GET['categoryId'], 'int');
-        $categoryId = $_GET['categoryId'];
-        if ($categoryId == 0) {
-            $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
-        } else {
-            $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product WHERE category_id = '$categoryId'";
-        }
-    } else {
-        $categoryId = 0;
-    }
-    $products = $conn->query($sqlShowProducts);
+    $sqlShowPosts = "SELECT * FROM post";
+    
+    $posts = $conn->query($sqlShowPosts);
 ?>
 <div class="container-fluid mt-5 mb-5">
     <div class="row">
-        <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="list-group mb-5">
-                <span class="list-group-item bg-warning text-dark" aria-current="true">
-                    <b class="user-select-none">Danh mục</b>
-                </span>
-                <?php
-                    $sqlShowCategory = "SELECT * FROM category";
-                    $category = $conn->query($sqlShowCategory);
-                    $i = 1;
-                    while ($row = $category->fetch_assoc()) {
-                ?>
-                <a href="<?php echo $rootPath?>/product.php?categoryId=<?php echo $row['category_id']?>" class=" <?php if ($categoryId == $i) echo 'bg-warning text-dark bg-opacity-25' ?> list-group-item list-group-item-action "><?php echo $row['category_name']?></a>
-                <?php
-                        $i++;
-                    }
-                ?>
-                <a href="<?php echo $rootPath?>/product.php?categoryId=0" class="list-group-item list-group-item-action <?php if($categoryId == 0) echo 'bg-warning text-dark bg-opacity-25'?>">Xem tất cả</a>
-            </div>
-        </div>
-        <div class="col-xl-10 col-md-8 col-sm-6">
+    
+        <div class="col">
             <div class="container mb-5">  
                 <div class="row">
                     <div class="d-flex justify-content-start me-4 mb-2">
-                        <button class="btn btn-outline-primary me-2"><b>Hàng mới</b></button>
-                        <button class="btn btn-outline-primary me-2"><b>Giá tăng dần</b></button>
-                        <button class="btn btn-outline-primary me-2"><b>Giá giảm dần</b></button>
+                        <button class="btn btn-outline-primary me-2"><b>Mới nhất</b></button>
+                        <!-- <button class="btn btn-outline-primary me-2"><b></b></button>
+                        <button class="btn btn-outline-primary me-2"><b>Giá giảm dần</b></button> -->
                     </div>
                 </div>    
                 <div class="row">
                     <?php
-                    if ($products->num_rows>0) {
-                        $totalProducts = $products->num_rows;
+                    if ($posts->num_rows>0) {
+                        $totalPosts = $posts->num_rows;
                         $currentPage = 1;
                         if (isset($_GET['page'])) {
                             settype($_GET['page'], 'int'); // tránh injection, trang tự về 0
                             $currentPage = $_GET['page'];
                         }
                         $limit = 4;
-                        $totalPage = ceil($totalProducts/$limit);
+                        $totalPage = ceil($totalPosts/$limit);
 
                         // giới hạn phân trang trong 1-totalPage
                         if($currentPage > $totalPage) {
@@ -92,58 +64,20 @@ if ($conn->error) {
                         }
 
                         $start = ($currentPage - 1)*$limit;
-                        $sqlShowProducts = $sqlShowProducts." LIMIT $start, $limit";
-                        $products = $conn->query($sqlShowProducts); 
-                        while ($row = $products->fetch_assoc()) {
+                        $sqlShowPosts = $sqlShowPosts." LIMIT $start, $limit";
+                        $posts = $conn->query($sqlShowPosts); 
+                        while ($row = $posts->fetch_assoc()) {
                     ?>
                     <div class="col-xl-3 col-md-6 col-sm-12 mb-3">
                         <div class="card h-100">
-                        <div class="product-img" style="background-image: url(<?php echo $rootPath?>/public/img/products/<?php echo $row["images"];?>);"></div>
+                        <div class="product-img" style="background-image: url(<?php echo $row['image']?>); padding-top: 50%; margin-left: 5%;"></div>
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div class="d-flex flex-column justify-content-start">
-                                <h6 class="card-title"><?php echo $row["name"];?></h6>
-                            </div>
-                            <div class="card-text">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>    
-                                        <?php  
-                                            if ($row["quantity"] > 0) {
-                                        ?>
-                                            <span class="badge bg-success">Còn hàng</span>
-                                        <?php
-                                            } else {
-                                        ?>
-                                            <span class="badge bg-danger">Hết hàng</span>
-                                        <?php
-                                            }
-                                        ?>
-                                    </div>
-                                    <div class="btn btn-outline-danger"><i class=" fa-light fa-heart"></i> </div>
-                                </div>
-                                <p>
-                                <?php
-                                    // Nếu có giá Khuyến mãi
-                                    if ($row["price_sale"] != 0 ) {
-                                ?>
-                                        <?php
-                                            echo '<del class="text-secondary">'.number_format($row["price"]).'</del><sup>đ</sup>'; 
-                                        ?> 
-                                    
-                                        <?php
-                                            echo '<strong><span class="text-danger ms-3">'.number_format($row["price_sale"]).'<sup>đ</sup></span></strong>'; 
-                                        ?> 
-                                <?php
-                                // nếu không có khuyến mãi, hiện giá gốc
-                                    } else {
-                                        echo '<strong>'.number_format($row["price"]).'<sup>đ</sup></strong>'; 
-                                    }
-                                ?>
-                                </p>
+                                <h6 class="card-title"><?php echo $row["title"];?></h6>
                             </div>
                         </div>
                         <div class="card-footer d-flex flex-column">
-                            <a href="<?php echo $rootPath?>/product_detail.php?productId=<?php echo $row['product_id']?>" class="btn btn-primary">Xem chi tiết</a>
-                            <a href="<?php echo $rootPath?>/process_cart.php?action=add&id=<?php echo $row['product_id']?>&quantity=1" class="btn btn-warning mt-1 <?php if ($row["quantity"] == 0) echo 'disabled'?>"><i class="fa-light fa-cart-plus"></i></a>
+                            <a href="<?php echo $rootPath?>/post.php?postId=<?php echo $row['post_id']?>" class="btn btn-warning">Xem chi tiết</a>
                         </div>
                         </div>
                     </div>
@@ -157,7 +91,7 @@ if ($conn->error) {
                     ?>
                 </div>
                 <?php 
-                    if($products->num_rows > 0) {
+                    if($posts->num_rows > 0) {
                 ?>
                 <div class="row">
                     <!-- Phân trang -->
@@ -167,7 +101,7 @@ if ($conn->error) {
                             if ($currentPage > 1 && $totalPage >1) {
                         ?>
                             <li class="page-item">
-                                <a href="<?php echo $rootPath?>/product.php?categoryId=<?php echo $categoryId ?>&page=<?php echo ($currentPage - 1); ?>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" data-remote="true">&lsaquo; Prev</a>
+                                <a href="<?php echo $rootPath?>/posts.php?page=<?php echo ($currentPage - 1); ?>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" data-remote="true">&lsaquo; Prev</a>
                             </li>
                         <?php
                             }
@@ -184,7 +118,7 @@ if ($conn->error) {
                                 }  else {
                         ?>
                             <li class="page-item">
-                                <a data-remote="true" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="<?php echo $rootPath ?>/product.php?categoryId=<?php echo $categoryId ?>&page=<?php echo $i ?>"><?php echo $i ?></a>
+                                <a data-remote="true" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="<?php echo $rootPath ?>/posts.php?page=<?php echo $i ?>"><?php echo $i ?></a>
                             </li>
                         <?php
                                 } 
@@ -194,7 +128,7 @@ if ($conn->error) {
                             if ($currentPage < $totalPage && $totalPage > 1) {
                         ?>
                             <li class="page-item">
-                                <a href="<?php echo $rootPath;?>/product.php?categoryId=<?php echo $categoryId ?>&page=<?php echo ($currentPage + 1) ?>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" data-remote="true">Next &rsaquo;</a>
+                                <a href="<?php echo $rootPath;?>/posts.php?page=<?php echo ($currentPage + 1) ?>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" data-remote="true">Next &rsaquo;</a>
                             </li>
                         <?php
                             }
