@@ -2,9 +2,9 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 07, 2022 at 11:51 AM
--- Server version: 10.4.21-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: Dec 07, 2022 at 12:23 PM
+-- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `assignmentWeb`
+-- Database: `assignmentweb`
 --
 
 -- --------------------------------------------------------
@@ -79,11 +79,20 @@ CREATE TABLE `order` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `payment_method` varchar(50) NOT NULL DEFAULT 'Tiền mặt khi nhận hàng',
-  `payment` bigint(20) NOT NULL DEFAULT 0,
-  `address_receiver` varchar(50) NOT NULL DEFAULT '0',
-  `phone_receiver` varchar(50) NOT NULL DEFAULT '0',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `payment` bigint(20) NOT NULL,
+  `address_receiver` varchar(50) NOT NULL,
+  `phone_receiver` varchar(50) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` enum('Đang xử lý','Đang giao','Đã giao') NOT NULL DEFAULT 'Đang xử lý',
+  `name_receiver` varchar(50) NOT NULL DEFAULT 'Đang xử lý'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`order_id`, `user_id`, `payment_method`, `payment`, `address_receiver`, `phone_receiver`, `updated_at`, `status`, `name_receiver`) VALUES
+(1, 2, 'Tiền mặt khi nhận hàng', 122000, 'Kí túc xá khu B, Đông Hòa, Dĩ An, Bình Dương', '0382848786', '2022-12-07 11:19:20', 'Đang xử lý', 'Nguyễn Văn An');
 
 -- --------------------------------------------------------
 
@@ -97,6 +106,15 @@ CREATE TABLE `order_item` (
   `quantity_item` bigint(20) NOT NULL DEFAULT 1,
   `price` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_item`
+--
+
+INSERT INTO `order_item` (`order_id`, `product_id`, `quantity_item`, `price`) VALUES
+(1, 2, 2, 29000),
+(1, 3, 1, 35000),
+(1, 4, 1, 29000);
 
 -- --------------------------------------------------------
 
@@ -145,8 +163,8 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`product_id`, `name`, `category_id`, `description`, `images`, `quantity`, `price`, `price_sale`, `timestamp`) VALUES
 (1, 'The Coffee House Sữa Đá', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus eros non diam porttitor consectetur. Aenean sed nisl eu orci mollis efficitur vel in urna. Mauris egestas, neque id hendrerit effi', 'coffeeSuaDa.jpg', 0, 39000, 25000, '2022-11-03 02:41:11'),
 (2, 'Cà Phê Sữa Đá', 1, '', 'coffeeSuaTruyenThong.jpg', 25, 29000, NULL, '2022-11-03 02:26:47'),
-(3, 'Cà Phê Sữa Nóng', 1, '', 'coffeeSuaNong.jpg', NULL, 35000, NULL, '2022-11-03 01:25:51'),
-(4, 'Bạc Sỉu', 1, '', 'coffeeBacSiu.jpg', NULL, 29000, NULL, '2022-11-03 01:26:55'),
+(3, 'Cà Phê Sữa Nóng', 1, '', 'coffeeSuaNong.jpg', 20, 35000, NULL, '2022-12-07 11:19:02'),
+(4, 'Bạc Sỉu', 1, '', 'coffeeBacSiu.jpg', 20, 29000, NULL, '2022-12-07 11:19:03'),
 (5, 'Bánh Mì Gậy Gà Kim Quất', 3, '', 'banhKimQuat.jpg', NULL, 25000, NULL, '2022-11-03 01:28:27'),
 (6, 'Bánh Mì VN Thịt Nguội', 3, '', 'banhMiVN.jpg', NULL, 35000, NULL, '2022-11-03 01:29:40'),
 (7, 'Bánh Mì Que Pate Cay', 3, '', 'banhMiQueCay.jpg', NULL, 15000, NULL, '2022-11-03 01:30:43'),
@@ -164,10 +182,17 @@ CREATE TABLE `review` (
   `review_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `title` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL DEFAULT '',
   `content` text DEFAULT '0',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`review_id`, `product_id`, `user_id`, `title`, `content`, `updated_at`) VALUES
+(1, 4, 1, 'Sản phẩm tốt', 'Giá phù hợp nhiều người dùng', '2022-12-07 11:12:23');
 
 -- --------------------------------------------------------
 
@@ -190,8 +215,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `phone`, `address`, `updated_at`) VALUES
-(1, 'huylg2109@gmail.com', 'lygiahuy', 'Huy', '0358035821', 'KTX Khu A ĐHQGTPHCM', '2022-12-07 08:02:13'),
-(2, 'user@gmail.com', '', 'User', '0123456789', 'KTX Khu B ĐHQGTPHCM', '2022-12-07 08:02:49');
+(1, 'huylg2109@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Huy', '0358035821', 'KTX Khu A ĐHQGTPHCM', '2022-12-07 11:02:33'),
+(2, 'hau.nguyenbk8786@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'User', '0123456789', 'KTX Khu B ĐHQGTPHCM', '2022-12-07 11:18:23'),
+(3, 'hau.nguyenbk19@hcmut.edu.vn', '25f9e794323b453885f5181f1b624d0b', 'Hậu', '0382848786', 'Hồ Chí Minh', '2022-12-07 11:03:15');
 
 --
 -- Indexes for dumped tables
@@ -270,7 +296,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -288,13 +314,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

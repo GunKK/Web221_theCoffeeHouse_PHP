@@ -34,7 +34,7 @@
     $ketQua = $conn->query($sqlFindUser);
     $user = $ketQua->fetch_array();
     $userId = $user['user_id'];
-    $sqlReviews = "SELECT title , content, times, name FROM review, product WHERE product.product_id = review.product_id AND user_id = '$userId'";
+    $sqlReviews = "SELECT review_id ,title , content, updated_at, name FROM review, product WHERE product.product_id = review.product_id AND user_id = '$userId'";
     $reviews = $conn->query($sqlReviews);
     if ($reviews->num_rows>0) {
 ?>
@@ -71,11 +71,11 @@
                         <td scope="col"><?=$row['title']?></td>
                         <td scope="col"><?=$row['content']?></td>
                         <td scope="col">
-                            <span class="d-none d-xl-block d-xxl-none"><?=$row['times']?></span>
+                            <span class="d-none d-xl-block d-xxl-none"><?=$row['updated_at']?></span>
                         </td>
                         <td scope="col">
-                            <a href="./update.php?id=<?php echo $row['review_id']?>" class="btn btn-success"><i class="fa-regular fa-wrench"></i></a>
-                            <a href="./delete.php" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            <button type="button" data-bs- class="btn btn-success"><i class="fa-regular fa-wrench"></i></button>
+                            <button type="button" data-bs- class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
             <?php

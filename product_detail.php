@@ -220,7 +220,7 @@ if ($product->num_rows > 0) {
         $userId = $user['user_id'];
     }
 
-    $sqlReviews = "SELECT user.user_id, name, title, content, times FROM review, user WHERE user.user_id = review.user_id AND review.product_id = '$productId'";
+    $sqlReviews = "SELECT user.user_id, name, title, content, review.updated_at FROM review, user WHERE user.user_id = review.user_id AND review.product_id = '$productId'";
     $review = $conn->query($sqlReviews);
     if ($review->num_rows>0) {
 ?>
