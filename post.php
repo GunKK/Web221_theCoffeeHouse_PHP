@@ -35,8 +35,8 @@ if ($conn->error) {
     $row = $post->fetch_assoc();
 ?>
 
-<div class="container-fluid bg-light py-5 px-5">
-    <div class="m-auto text-center py-5 px-3" style="width: 60%; box-shadow: 0 10px 20px rgb(0 0 0 / 10%);">
+<div class="container-fluid bg-light p-xxl-5 p-md-3">
+    <div class="col-lg-8 col-md-10 m-auto text-center py-5 px-3" style="box-shadow: 0 10px 20px rgb(0 0 0 / 10%);">
         <h1 class="h1"><?php echo $row['title'];?></h1>
         <img src="<?php echo $row['image']?>" alt="" style="width: 90%;">
         <p class="text-start mt-5 px-3">
