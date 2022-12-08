@@ -4,7 +4,7 @@ $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
 $conn->error;
 if ($conn->error) {
     die('Kết nối thất bại'.$conn->error);
-} 
+}
 ?>
 
 <?php
@@ -20,6 +20,10 @@ if ($conn->error) {
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $re_password = mysqli_real_escape_string($conn, $_POST['re_password']);
         
+        if (checkEmailExist($email) != ""){
+          $is_validated = false;
+          $errorEmail = checkEmailExist($email);
+        }
         if (validateEmail($email) != "") {
           $is_validated = false;
           $errorEmail = validateEmail($email);
@@ -28,10 +32,10 @@ if ($conn->error) {
           $is_validated = false;
           $errorPhone = validatePhone($phone);
         }
-        // if (validatePassword($password) != "") {
-        //   $is_validated = false;
-        //   $errorPassword = validateEmail($password);
-        // }
+        if (validatePassword($password) != "") {
+          $is_validated = false;
+          $errorPassword = validatePassword($password);
+        }
         if (checkPassword($password, $re_password) != "") {
           $is_validated = false;
           $errorRePassword = "Nhập mật khẩu lần 2 không khớp.";
@@ -80,7 +84,7 @@ if ($conn->error) {
           <?php
             if ($status != "") {
               echo '<div class="alert alert-success" role="alert">
-                '.$status.'
+                '.$status.'<a href="./customer/login.php">Đăng nhập ngay</a>
               </div>';
             }
           ?>
@@ -127,10 +131,12 @@ if ($conn->error) {
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
                 <input type="password" name="password" class="form-control" placeholder="Password" value='<?php echo $password?>'>
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-1">
                 <div id="passwordHelpBlock" class="form-text text-danger">
                   <?php echo $errorPassword ?>
                 </div>
-              </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
               <div class="input-group flex-nowrap">
