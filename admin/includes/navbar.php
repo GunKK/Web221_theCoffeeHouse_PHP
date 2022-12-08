@@ -25,6 +25,7 @@
               <li><a class="dropdown-item" href="<?php echo $rootPath?>/customers/">Người dùng</a></li>
               <li><a class="dropdown-item" href="<?php echo $rootPath?>/posts/">Tin tức</a></li>
               <li><a class="dropdown-item" href="<?php echo $rootPath?>/products/">Sản phẩm</a></li>
+              <li><a class="dropdown-item" href="<?php echo $rootPath?>/contacts/">Liên hệ</a></li>
               <li><a class="dropdown-item" href="<?php echo $rootPath?>/orders">Đơn hàng</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">More</a></li>

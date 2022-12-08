@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2022 at 12:36 PM
+-- Generation Time: Dec 08, 2022 at 04:50 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -66,8 +66,32 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 (3, 'Bánh & Snack'),
 (4, 'CloudFee'),
 (5, 'Hi-Tea Healthy'),
-(6, 'CloudTea'),
-(7, 'Thức uống khác');
+(6, 'CloudTea');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `message` varchar(2000) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `username`, `email`, `message`, `status`, `created_at`) VALUES
+(1, 'Huy', 'huylg2109@gmail.com', 'Hi, thank you for your recent inquiry. Let us know how we did by completing this short survey. It takes less than a minute to complete.', 0, '2022-12-08 14:21:58'),
+(2, 'Huy', 'huylg2109@gmail.com', 'Huy, it’s been a while; we miss you! Let us know if there’s anything we can do to improve your experience or if you have any questions for us. We value you and would love to hear from you.', 0, '2022-12-08 14:22:35'),
+(3, 'Huân', 'huan@gmail.com', 'Hi, this is to confirm that your recent support ticket has been resolved and closed. We thank you for your patience.', 0, '2022-12-08 14:29:18'),
+(4, 'Hậu', 'hau.nguyenbk8786@gmail.com', 'Use these to celebrate customer anniversaries, an upcoming holiday, or birthday. “Happy Birthday Hậu! As an extra-special thank you for being a loyal customer, here’s $50 on us. Use it toward any of your favorite products.', 0, '2022-12-08 14:49:39');
 
 -- --------------------------------------------------------
 
@@ -169,16 +193,16 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `name`, `category_id`, `description`, `images`, `quantity`, `price`, `price_sale`, `timestamp`) VALUES
-(1, 'The Coffee House Sữa Đá', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus eros non diam porttitor consectetur. Aenean sed nisl eu orci mollis efficitur vel in urna. Mauris egestas, neque id hendrerit effi', 'coffeeSuaDa.jpg', 0, 39000, 25000, '2022-11-03 02:41:11'),
-(2, 'Cà Phê Sữa Đá', 1, '', 'coffeeSuaTruyenThong.jpg', 25, 29000, NULL, '2022-11-03 02:26:47'),
-(3, 'Cà Phê Sữa Nóng', 1, '', 'coffeeSuaNong.jpg', 20, 35000, NULL, '2022-12-07 11:19:02'),
-(4, 'Bạc Sỉu', 1, '', 'coffeeBacSiu.jpg', 20, 29000, NULL, '2022-12-07 11:19:03'),
-(5, 'Bánh Mì Gậy Gà Kim Quất', 3, '', 'banhKimQuat.jpg', NULL, 25000, NULL, '2022-11-03 01:28:27'),
-(6, 'Bánh Mì VN Thịt Nguội', 3, '', 'banhMiVN.jpg', NULL, 35000, NULL, '2022-11-03 01:29:40'),
-(7, 'Bánh Mì Que Pate Cay', 3, '', 'banhMiQueCay.jpg', NULL, 15000, NULL, '2022-11-03 01:30:43'),
-(8, 'Mochi Kem Phúc Bồn Tử', 3, '', 'banhMoChiVietQuat.jpg', NULL, 19000, NULL, '2022-11-03 01:32:28'),
-(9, 'Hi-tea Trà Xoài', 5, NULL, 'hiTeaXoai.jpg', NULL, 55000, NULL, '2022-11-03 05:05:45'),
-(10, 'Hi-tea Trà Vải', 5, NULL, 'hiTeaVai.jpg', NULL, 59000, NULL, '2022-11-03 05:17:34');
+(1, 'The Coffee House Sữa Đá', 1, 'Thức uống giúp tỉnh táo tức thì để bắt đầu ngày mới thật hứng khởi. Không đắng khét như cà phê truyền thống, The Coffee House Sữa Đá mang hương vị hài hoà đầy lôi cuốn. Là sự đậm đà của 100% cà phê Arabica Cầu Đất rang vừa tới, biến tấu tinh tế với sữa đặc và kem sữa ngọt ngào cực quyến rũ. Càng hấp dẫn hơn với topping thạch 100% cà phê nguyên chất giúp giữ trọn vị ngon đến ngụm cuối cùng.', 'coffeeSuaDa.jpg', 0, 39000, 25000, '2022-12-07 16:24:59'),
+(2, 'Cà Phê Sữa Đá', 1, 'Sự độc đáo trong thưởng thức cà phê của người Việt    Cà phê phin kết hợp cùng sữa đặc là một sáng tạo đầy tự hào của người Việt, được xem món uống thương hiệu của Việt Nam.  Khi người Pháp đem văn hóa cà phê vào Việt Nam, người bản xứ thay thế sữa tươi đắt đỏ bằng sữa đặc rẻ tiền hơn để pha cùng cà phê. Tuy nhiên, bằng sự kết hợp hài hòa giữa các thái cực đắng – ngọt, bùi – béo, ly cà phê sữa đá lại sánh đặc và đậm đà hơn, không làm mất đi công dụng của cà phê mà bổ sung thêm năng lượng cho cơ thể từ sữa đã trở thành quen thuộc với nếp sống của người Việt và là một nét sáng tạo riêng, chinh phục được trái tim hàng triệu người yêu cà phê trên thế giới.', 'coffeeSuaTruyenThong.jpg', 25, 29000, NULL, '2022-12-07 16:25:12'),
+(3, 'Cà Phê Sữa Nóng', 1, 'Sự độc đáo trong thưởng thức cà phê của người Việt  Cà phê phin kết hợp cùng sữa đặc là một sáng tạo đầy tự hào của người Việt, được xem món uống thương hiệu của Việt Nam.  Khi người Pháp đem văn hóa cà phê vào Việt Nam, người bản xứ thay thế sữa tươi đắt đỏ bằng sữa đặc rẻ tiền hơn để pha cùng cà phê. Tuy nhiên, bằng sự kết hợp hài hòa giữa các thái cực đắng – ngọt, bùi – béo, ly cà phê sữa đá lại sánh đặc và đậm đà hơn, không làm mất đi công dụng của cà phê mà bổ sung thêm năng lượng cho cơ thể từ sữa đã trở thành quen thuộc với nếp sống của người Việt và là một nét sáng tạo riêng, chinh phục được trái tim hàng triệu người yêu cà phê trên thế giới.', 'coffeeSuaNong.jpg', 20, 35000, NULL, '2022-12-07 16:25:18'),
+(4, 'Bạc Sỉu', 1, 'Bạc sỉu – Nét văn hóa đầy tự hào của người Sài Gòn  Chính vị ngon của sữa trong 1 ly Bạc sỉu sẽ là thứ chinh phục bạn.  Nguồn gốc  Theo chân những người gốc Hoa đến định cư tại Sài Gòn, Bạc sỉu là cách gọi tắt của \"Bạc tẩy sỉu phé\" trong tiếng Quảng Đông. Bạc là \"trắng\". Tẩy là \"ly\". Sỉu là \"một chút\". Phé là \"cà phê\".  Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\".  Người lao động phổ thông khi xưa dùng sữa đặc pha với nước nóng để thay thế cho sữa tươi đắt đỏ trong thời điểm ấy. Tuy vậy, vị sữa đặc pha khá nồng, nên họ biến tấu chút cà phê vào cho ly sữa thêm thơm và hấp dẫn.  Người Sài Gòn \"chánh hiệu con mèo đen\" dùng Bạc sỉu nóng. Theo thời gian, người ta thêm đá vào ly “sữa cà phê” này để thưởng thức được cả trong những ngày oi bức.', 'coffeeBacSiu.jpg', 20, 29000, NULL, '2022-12-07 16:25:46'),
+(5, 'Bánh Mì Gậy Gà Kim Quất', 3, 'Croissant trứng muối thơm lừng, bên ngoài vỏ bánh giòn hấp dẫn bên trong trứng muối vị ngon khó cưỡng.', 'banhKimQuat.jpg', NULL, 25000, NULL, '2022-12-07 16:30:10'),
+(6, 'Bánh Mì VN Thịt Nguội', 3, 'Gói gọn trong ổ bánh mì Việt Nam là từng lớp chả, từng lớp jambon hòa quyện cùng bơ và pate thơm lừng, thêm dưa rau cho bữa sáng đầy năng lượng. *Phần bánh sẽ ngon và đậm đà nhất khi kèm pate. Để đảm bảo hương vị được trọn vẹn, Nhà mong bạn thông cảm vì không thể thay đổi định lượng pate.', 'banhMiVN.jpg', NULL, 35000, NULL, '2022-12-07 16:26:12'),
+(7, 'Bánh Mì Que Pate Cay', 3, 'Nguồn gốc thú vị của chiếc bánh mì que  Bánh mì que hay còn có tên gọi khác là bánh mì gậy) là một loại bánh mì Pháp xuất xứ từ nước Pháp (một số nguồn cho rằng loại bánh này có nguồn gốc nguyên thủy là ở vùng Torino của Ý). Có tên gọi như vậy chủ yếu là vì hình dạng thon dài của loại bánh này. Ở Việt Nam, bánh mì que lại nổi tiếng theo vùng, với mỗi vùng lại có hương vị đặc trưng riêng, nổi tiếng nhất là bánh mì que Hải Phòng & Đà Nẵng. Trong khi bánh mì que Hải Phòng thành phần chính là pate thì bánh mì que Đà Nẵng lại có thêm dăm bông, thịt nguội bên cạnh pate.      Hương vị bánh mì que Nhà  Tại The Coffee House, bánh mì là loại bánh mì gần giống hương vị bánh mì que Hải Phòng. Với thành phần chính chủ yếu là pate. Vỏ bánh mì giòn tan, kết hợp với lớp nhân pate béo béo đậm đà sẽ là lựa chọn lý tưởng nhẹ nhàng để lấp đầy chiếc bụng đói.', 'banhMiQueCay.jpg', NULL, 15000, NULL, '2022-12-07 16:26:44'),
+(8, 'Mochi Kem Phúc Bồn Tử', 3, ' Nguồn gốc Nhật Bản  Theo wikipedia, Mochi là một loại bánh giầy nhân ngọt truyền thống của Nhật Bản. Mochi được làm từ bột gạo nếp. Không chỉ để ăn, Mochi còn được xem như là vật phẩm dâng lên thần linh và có ý nghĩa may mắn. Người Nhật tin rằng khi ăn bánh Mochi nướng tại lễ Dondo-yaki sẽ mang lại sức khỏe cho suốt cả năm. Bánh Mochi cũng có mặt trong lễ dựng nhà mới Choto-shiki của người Nhật.     Bánh Mochi tại the Coffee House  Bao bọc bởi lớp vỏ Mochi dẻo thơm, bên trong là lớp kem lạnh cùng các loại nhân độc đáo, đa dạng như việt quất, dừa dứa, matcha, phúc bồn tử, xoài. Mochi được ra mắt cùng Trà sữa đúng gu. Sự kết hợp này đã nhận được sự ủng hộ yêu thích nhiệt tình ngay từ những ngày đầu ra mắt. Vị mohci thơm ngọt mát lạnh, kết hợp vị trà sữa béo đặc trưng của Nhà có thể khiến bạn yêu ngay từ lần thử đầu .', 'banhMoChiVietQuat.jpg', NULL, 19000, NULL, '2022-12-07 16:27:19'),
+(9, 'Hi-tea Trà Xoài', 5, 'Vị ngọt thanh, thơm phức từ xoài chín mọng kết hợp cùng vị chua đặc trưng của trà hoa Hibiscus tự nhiên, sẽ khiến bạn khó lòng quên được thức uống “chân ái” mùa hè này. Đặc biệt, topping Aloe Vera tự nhiên không chỉ nhâm nhi vui miệng mà còn giúp bạn “nâng tầm nhan sắc”.', 'hiTeaXoai.jpg', NULL, 55000, NULL, '2022-12-07 16:29:09'),
+(10, 'Hi-tea Trà Vải', 5, 'Sự kết hợp ăn ý giữa Đào cùng trà hoa Hibiscus, tạo nên tổng thể hài hoà dễ gây “thương nhớ” cho team thích món thanh mát, có vị chua nhẹ.', 'hiTeaVai.jpg', NULL, 59000, NULL, '2022-12-07 16:28:49');
 
 -- --------------------------------------------------------
 
@@ -223,7 +247,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `phone`, `address`, `updated_at`) VALUES
-(1, 'huylg2109@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Huy', '0358035821', 'KTX Khu A ĐHQGTPHCM', '2022-12-07 11:02:33'),
+(1, 'huylg2109@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Huy', '0855994282', 'KTX Khu A DHQGTPHCM', '2022-12-08 06:59:35'),
 (2, 'hau.nguyenbk8786@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'User', '0123456789', 'KTX Khu B ĐHQGTPHCM', '2022-12-07 11:18:23'),
 (3, 'hau.nguyenbk19@hcmut.edu.vn', '25f9e794323b453885f5181f1b624d0b', 'Hậu', '0382848786', 'Hồ Chí Minh', '2022-12-07 11:03:15');
 
@@ -242,6 +266,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `order`
@@ -299,6 +329,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order`
