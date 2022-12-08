@@ -17,7 +17,11 @@ function validatePhone($phone) {
 
 function validatePassword($password) {
     $error = "";
-    if (!preg_match("/#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#/", $password)) {
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+    if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
         $error = "Mật khẩu phải gồm ít nhất 8 kí kự và phải chứa ít nhất 1 chữ số, 1 chữ viết hoa, 1 chữ viết thường, 1 kí tự đặc biệt.";
     } 
     return $error;
