@@ -8,25 +8,46 @@ if ($conn->error) {
 ?>
 
 <?php
+    require("./validate.php");
     $status = "";
     if (isset($_POST['register'])) {
+        $is_validated = true;
+        $errorEmail = $errorPhone = $errorPassword = $errorRePassword = "";
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
         $address = mysqli_real_escape_string($conn, $_POST['address']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $re_password = mysqli_real_escape_string($conn, $_POST['re_password']);
-
-        $password = md5($password);
-        $sql = "INSERT INTO user (name, email, phone, address, password) VALUES ('$name', '$email', '$phone', '$address', '$password')";
         
-        if ($conn->query($sql) === TRUE) {
-            echo "Resgiter user successfully";
-            // $status = "Cảm ơn bạn đã liên hệ với chúng tôi. <br> Chúng tôi sẽ phản hồi cho bạn trong thời gian sớm nhất.";
-            header("Location: ./customer/login.php");
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+        if (validateEmail($email) != "") {
+          $is_validated = false;
+          $errorEmail = validateEmail($email);
         }
+        if (validatePhone($phone) != "") {
+          $is_validated = false;
+          $errorPhone = validatePhone($phone);
+        }
+        // if (validatePassword($password) != "") {
+        //   $is_validated = false;
+        //   $errorPassword = validateEmail($password);
+        // }
+        if (checkPassword($password, $re_password) != "") {
+          $is_validated = false;
+          $errorRePassword = "Nhập mật khẩu lần 2 không khớp.";
+        }
+        if ($is_validated) {
+          $password = md5($password);
+          $sql = "INSERT INTO user (name, email, phone, address, password) VALUES ('$name', '$email', '$phone', '$address', '$password')";
+          
+          if ($conn->query($sql) === TRUE) {
+              // echo "Resgiter user successfully";
+              // header("Location: ./customer/login.php");
+              $status = "Đăng kí tài khoản thành công.";
+          } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+        }   
     }
 ?>
 
@@ -55,49 +76,77 @@ if ($conn->error) {
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-          <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng kí tài khoản</p>
+          <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">Đăng kí tài khoản</p>
+          <?php
+            if ($status != "") {
+              echo '<div class="alert alert-success" role="alert">
+                '.$status.'
+              </div>';
+            }
+          ?>
+          
           <form class="mx-1 mx-md-4" action="" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="8Fbe9hfBpqPx_ZXk5jR5LonDJ4lV50D91z39EZ8jJnh7iC7OsaO3pW-TdTF4w0Wo26rlq0fKTCbtgw8ETwu1NQ" autocomplete="off" />
             
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-2">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-user"></i></span>
-                <input type="text" name="name"  class="form-control" placeholder="Username">
+                <input type="text" name="name"  class="form-control" placeholder="Username" value='<?php echo $name?>'>
               </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-1">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-envelope"></i></span>
-                <input type="text" name="email" class="form-control" placeholder="Email">
+                <input type="text" name="email" class="form-control" placeholder="Email" value='<?php echo $email?>'>
               </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-1">
+              <div id="emailHelpBlock" class="form-text text-danger">
+                <?php echo $errorEmail ?>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-phone"></i></span>
-                <input type="text" name="phone" class="form-control" placeholder="Phone">
+                <input type="text" name="phone" class="form-control" placeholder="Phone" value='<?php echo $phone?>'>
               </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-1">
+                <div id="phoneHelpBlock" class="form-text text-danger">
+                  <?php echo $errorPhone ?>
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-2">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-house"></i></span>
-                <input type="text" name="address" class="form-control" placeholder="Address">
+                <input type="text" name="address" class="form-control" placeholder="Address" value='<?php echo $address?>'>
               </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-2">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                <input type="password" name="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" class="form-control" placeholder="Password" value='<?php echo $password?>'>
+                <div id="passwordHelpBlock" class="form-text text-danger">
+                  <?php echo $errorPassword ?>
+                </div>
               </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-1">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                <input type="password" name="re_password" class="form-control" placeholder="Re-Password">
+                <input type="password" name="re_password" class="form-control" placeholder="Re-Password" value='<?php echo $re_password?>'>
               </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-1">
+                <div id="rePasswordHelpBlock" class="form-text text-danger">
+                  <?php echo $errorRePassword ?>
+                </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
               <input type="submit" name="register" value="Register" class="btn btn-primary btn-lg" data-disable-with="Create account" />
             </div>
+
           </form>        
         </div>
         <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-center order-1 order-lg-2">

@@ -108,14 +108,14 @@ if ($conn->error) {
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div class="text-center">
-                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/logo.jpg" class="rounded-circle mb-3 mt-3" /></a>
+                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/profile2.jpeg" class="rounded-circle mb-3 mt-3" /></a>
                     <p class="text-dark">Trần Thế Quang</p>
                     <!-- <a class="btn btn-primary text-light" href="#">Contact</a> -->
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div class="text-center">
-                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/logo.jpg" class="rounded-circle mb-3 mt-3" /></a>
+                    <a href="#"><img alt="AVT" width="200" height="200" src="<?php echo $rootPath?>/public/img/profile2.jpeg"" class="rounded-circle mb-3 mt-3" /></a>
                     <p class="text-dark">Võ Trịnh Xuân Nguyên</p>
                     <!-- <a class="btn btn-primary text-light" href="#">Contact</a> -->
                 </div>
