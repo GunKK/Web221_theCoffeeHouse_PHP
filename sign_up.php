@@ -6,13 +6,37 @@ if ($conn->error) {
     die('Kết nối thất bại'.$conn->error);
 } 
 ?>
+
+<?php
+    $status = "";
+    if (isset($_POST['register'])) {
+        $name = mysqli_real_escape_string($conn, $_POST['name']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+        $address = mysqli_real_escape_string($conn, $_POST['address']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+        $re_password = mysqli_real_escape_string($conn, $_POST['re_password']);
+
+        $password = md5($password);
+        $sql = "INSERT INTO user (name, email, phone, address, password) VALUES ('$name', '$email', '$phone', '$address', '$password')";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "Resgiter user successfully";
+            // $status = "Cảm ơn bạn đã liên hệ với chúng tôi. <br> Chúng tôi sẽ phản hồi cho bạn trong thời gian sớm nhất.";
+            header("Location: ./customer/login.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign up</title>
     <link rel="stylesheet"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -37,44 +61,45 @@ if ($conn->error) {
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-user"></i></span>
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" name="name"  class="form-control" placeholder="Username">
               </div>
             </div>
 
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-envelope"></i></span>
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" name="email" class="form-control" placeholder="Email">
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-phone"></i></span>
-                <input type="text" class="form-control" placeholder="Phone">
+                <input type="text" name="phone" class="form-control" placeholder="Phone">
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-house"></i></span>
-                <input type="text" class="form-control" placeholder="Address">
+                <input type="text" name="address" class="form-control" placeholder="Address">
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                <input type="text" class="form-control" placeholder="Password">
+                <input type="password" name="password" class="form-control" placeholder="Password">
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                <input type="text" class="form-control" placeholder="Re-Password">
+                <input type="password" name="re_password" class="form-control" placeholder="Re-Password">
               </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
               <input type="submit" name="register" value="Register" class="btn btn-primary btn-lg" data-disable-with="Create account" />
             </div>
-</form>        </div>
+          </form>        
+        </div>
         <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-center order-1 order-lg-2">
           <img class="img-fluid rounded w-75" alt="Signup image" src="<?php echo $rootPath;?>/public/img/signup_img.png" />
         </div>
