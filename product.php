@@ -66,11 +66,11 @@ if ($conn->error) {
         <div class="col-xl-10 col-md-8 col-sm-6">
             <div class="container mb-5">  
                 <div class="row">
-                    <div class="d-flex justify-content-start me-4 mb-2">
+                    <!-- <div class="d-flex justify-content-start me-4 mb-2">
                         <button class="btn btn-outline-primary me-2"><b>Hàng mới</b></button>
                         <button class="btn btn-outline-primary me-2"><b>Giá tăng dần</b></button>
                         <button class="btn btn-outline-primary me-2"><b>Giá giảm dần</b></button>
-                    </div>
+                    </div> -->
                 </div>    
                 <div class="row">
                     <?php
