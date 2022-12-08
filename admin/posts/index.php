@@ -2,14 +2,11 @@
   session_start();
   ob_start();
   $rootPath = '/AssignmentWeb/admin';
-  // if (!isset($_SESSION["email_ad"])) {
-  //     header('location: login.php');
-  // }
-  $server = 'localhost';
-  $dbname = 'assignmentWeb';
-  $user = 'root';
-  $pass = '';
-  $conn = new mysqli($server, $user, $pass, $dbname);
+  if (!isset($_SESSION["email_ad"])) {
+      header('location: ../login.php');
+  }
+
+  $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
 
   $sqlShowPost = "SELECT * FROM post";
   $posts = $conn->query($sqlShowPost);

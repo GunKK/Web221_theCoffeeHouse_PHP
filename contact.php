@@ -8,6 +8,23 @@ if ($conn->error) {
     die('Kết nối thất bại'.$conn->error);
 } 
 ?>
+
+<?php
+    $status = "";
+    if (isset($_POST['submit'])) {
+        $name = mysqli_real_escape_string($conn, $_POST['name']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $message = mysqli_real_escape_string($conn, $_POST['message']);
+        $sql = "INSERT INTO contact (username, email, message) VALUES ('$name', '$email', '$message')";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "Send message successfully";
+            $status = "Cảm ơn bạn đã liên hệ với chúng tôi. <br> Chúng tôi sẽ phản hồi cho bạn trong thời gian sớm nhất.";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +54,8 @@ if ($conn->error) {
 <!-- start contact page -->
 <div class="container py-5">
     <div class="row py-5">
-        <form class="col-md-9 m-auto" action="" method="post" role="form">
+        <p class="text-center text-danger"><?php echo $status?></p>
+        <form class="col-md-9 m-auto" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" role="form">
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label for="contactName">Tên của bạn</label>
@@ -54,7 +72,7 @@ if ($conn->error) {
             </div>
             <div class="row">
                 <div class="col text-end mt-2">
-                    <button type="submit" class="btn btn-success btn-lg px-5 contact-btn">Gửi</button>
+                    <button name="submit" type="submit" class="btn btn-success btn-lg px-5 contact-btn">Gửi</button>
                 </div>
             </div>
         </form>

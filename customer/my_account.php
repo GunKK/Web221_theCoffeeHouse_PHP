@@ -18,8 +18,6 @@
         $address = $_POST['address'];
         $phone = $_POST['phone'];
         $sql = "UPDATE `user` SET name='$name', address = '$address', phone = '$phone' WHERE email='$email';";
-        // echo $sql;
-        // exit;
         if ($conn->query($sql) === TRUE) {
             echo "User successfully updated";
             $status = "Đã cập nhật thành công.";

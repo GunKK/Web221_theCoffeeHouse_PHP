@@ -31,7 +31,7 @@ $ketqua = $conn->query($sql);
 <body>
 <?php 
     require '../includes/header.php';
-    require '../includes/navbar.php';
+    // require '../includes/navbar.php';
 ?>
 
 <?php

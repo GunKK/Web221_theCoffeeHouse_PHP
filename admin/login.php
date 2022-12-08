@@ -23,7 +23,7 @@ $ketqua = $conn->query($sql);
   </head>
 <body>
 <?php
-    require './includes/header.php ';
+    require './includes/header.php';
     // require $rootPath.'/includes/navbar.php';
 ?>
 
