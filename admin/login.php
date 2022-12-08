@@ -52,6 +52,11 @@ if (isset($_POST['login_ad'])) {
         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
           <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login Admin</p>
+          <?php 
+            if (isset($_COOKIE['thongBao'])) {
+              echo '<p class="alert alert-success">'.$_COOKIE['thongBao'].'</p>';
+            }
+          ?>
           <form class="mx-1 mx-md-4" action="<?php echo $_SERVER['PHP_SELF']?>" accept-charset="UTF-8" method="post">
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">

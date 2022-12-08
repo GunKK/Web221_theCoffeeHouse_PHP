@@ -9,6 +9,36 @@ $conn->error;
 if ($conn->error) {
     die('Kết nối thất bại'.$conn->error);
 } 
+
+	$email = $_SESSION["email_ad"];
+	$email = mysqli_real_escape_string($conn, $email);
+	$sqlPassword = "SELECT password FROM admin WHERE email = '$email'";
+	$ketQua = $conn->query($sqlPassword);
+	$ketQua = $ketQua->fetch_array();
+	$password = $ketQua['password'];
+	if (isset($_POST['change'])) {
+		$oldPassword = $_POST['oldPassword'];
+		$newPassword = $_POST['newPassword'];
+		if ($oldPassword=='' || $newPassword =='') {
+			$tb = 'Bạn chưa nhập đầy đủ dữ liệu';
+		} else {
+			$oldPassword = md5($oldPassword);
+			$newPassword = md5($newPassword);
+			if ($oldPassword != $password) {
+				$tb = 'Bạn nhập sai mật khẩu cũ!';
+			} else {
+				if ($newPassword == $password) {
+					$tb = 'Mật khẩu mới trùng mật khẩu cũ';
+				} else {
+					$sqlUpdate = "UPDATE admin SET password = '$newPassword' WHERE email = '$email'";
+					$conn->query($sqlUpdate);
+					setcookie('thongBao', 'Đổi mật khẩu thành công! Vui lòng đăng nhập lại', time()+5);
+					$conn->close();
+					header('location: ./logout.php');
+				}
+			}
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,36 +59,41 @@ if ($conn->error) {
     require './includes/navbar.php';
 ?>
 
-#index admin
+<div class="container">
+	<div class="row">
+        <div class="col text-center h4 text-primary">
+            Đổi mật khẩu
+        </div>
+    </div>
+	<?php 
+        if (isset($tb)) {
+            echo '<div class="row"><div class="alert alert-danger">'.$tb.'</div></div>'; 
+        }
+    ?>
+	<div class="row">
+		<div class="col-2"></div>
+		<div class="col-8 shadow p-3 mb-5 bg-body rounded">
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+				<div class="mb-3">
+					<label for="oldPassword" class="form-label">Mật khẩu cũ</label>
+					<input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Nhập mật khẩu cũ">
+				</div>
+				<div class="mb-3">
+					<label for="newPassword" class="form-label">Mật khẩu mới</label>
+					<input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới">
+				</div>
+				<div class="text-center">
+					<input type="submit" class="btn btn-success" value="Thực thi" name="change">
+				</div>
+			</form>
+		</div>
+		<div class="col-2"></div>
+	</div>
+</div>
+
 <?php
   require './includes/footer.php';
 ?>
-<!-- modal change password -->
-<!-- <div class="modal fade" id="change_pwd_ad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-duotone fa-key-skeleton"></i> Thay đổi mật khẩu</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-            <form action="./change_password.php" method="post" enctype="multipart/form-data">
-                <div class="h4 text-dark">Mời nhập mật khẩu mới</div>
-                <div class="d-flex flex-row align-items-around mb-4">
-                    <div class="input-group flex-nowrap">
-                        <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                        <input type="password" class="form-control" name="pwd_ad" placeholder="Enter new password">
-                    </div>
-                </div>  
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
-        <button type="submit" class="btn btn-success" name="update_pwd_ad">Thay đổi</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div> -->
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

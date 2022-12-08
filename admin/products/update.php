@@ -87,8 +87,8 @@ if (isset($_POST['update'])) {
         }
     ?>
     <div class="row">
-        <div class="col-xl-2"></div>
-        <div class="col-xl-8 col-md-6 col-sm-12 shadow p-3 mb-5 bg-body rounded">
+        <div class="col-2"></div>
+        <div class="col-8 shadow p-3 mb-5 bg-body rounded">
             <form action="<?=$_SERVER['PHP_SELF']?>?id=<?=$productId?>" method="post" enctype="multipart/form-data">
                 <?php
                     $product = $product->fetch_array();
@@ -138,7 +138,7 @@ if (isset($_POST['update'])) {
                 <input type="submit" class="btn btn-success w-100 mt-2" value="Cập nhật" name="update">
             </form>
         </div>
-        <div class="col-xl-2"></div>
+        <div class="col-2"></div>
     </div>
 </div>
 
