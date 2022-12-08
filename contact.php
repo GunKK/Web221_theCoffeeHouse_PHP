@@ -14,7 +14,7 @@ if ($conn->error) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Liên hệ</title>
     <link rel="stylesheet"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -28,9 +28,9 @@ if ($conn->error) {
 ?>
 <div class="container-fluid bg-light py-5">
     <div class="col-md-6 m-auto text-center">
-        <h1 class="h1">Contact Us</h1>
+        <h1 class="h1">Liên hệ với chúng tôi</h1>
         <p>
-            Should you have any inquiries into our business, drop a message, here.
+            Bạn có thắc mắc về dịch vụ của chúng ta? Hãy gửi tin nhắn cho chúng tôi tại đây.
         </p>
     </div>
 </div>
@@ -40,7 +40,7 @@ if ($conn->error) {
         <form class="col-md-9 m-auto" action="" method="post" role="form">
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
-                    <label for="contactName">Name</label>
+                    <label for="contactName">Tên của bạn</label>
                     <input type="text" class="form-control mt-1" id="contactName" name="name" placeholder="Enter your name">
                 </div>
                 <div class="form-group col-md-6 mb-3">
@@ -49,12 +49,12 @@ if ($conn->error) {
                 </div>
             </div>
             <div class="mb-3">
-                <label for="contactMessage">Message</label>
+                <label for="contactMessage">Tin nhắn</label>
                 <textarea class="form-control mt-1" id="contactMessage" name="message" placeholder="Message" rows="8"></textarea>
             </div>
             <div class="row">
                 <div class="col text-end mt-2">
-                    <button type="submit" class="btn btn-success btn-lg px-3 contact-btn">SUBMIT</button>
+                    <button type="submit" class="btn btn-success btn-lg px-5 contact-btn">Gửi</button>
                 </div>
             </div>
         </form>
