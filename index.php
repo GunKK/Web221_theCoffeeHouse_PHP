@@ -34,11 +34,11 @@ if ($conn->error) {
         <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="3000">
+        <div class="carousel-item active" data-bs-interval="2000">
             <div class="container">
                 <div class="row p-5">
                     <div class="mx-auto col-md-8 col-lg-6 d-flex align-items-center">
-                        <a href="#"><img class="img-fluid rounded" src="./public/img/slider1.jpg" /></a>
+                        <a href="#"><img class="img-fluid rounded" src="./public/img/carousels/carousel1.jpeg" style="height: 390px;"/></a>
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center" style="height: 300px;">
                         <div class="text-align-left align-self-center">
@@ -57,7 +57,7 @@ if ($conn->error) {
             <div class="container">
                 <div class="row p-5">
                     <div class="mx-auto col-md-8 col-lg-6 d-flex align-items-center">
-                        <a href="#"><img class="img-fluid rounded" src="./public/img/slider2.jpg" /></a>
+                        <a href="#"><img class="img-fluid rounded" src="./public/img/carousels/carousel2.jpeg" style="height: 390px;"/></a>
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center" style="height: 300px";>
                         <div class="text-align-left">
@@ -75,7 +75,7 @@ if ($conn->error) {
             <div class="container">
                 <div class="row p-5">
                     <div class="mx-auto col-md-8 col-lg-6 d-flex align-items-center">
-                        <a href="#"><img class="img-fluid rounded" src="./public/img/slider3.jpg" /></a>
+                        <a href="#"><img class="img-fluid rounded" src="./public/img/carousels/carousel3.jpeg" style="height: 390px;" /></a>
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center" style="height: 300px;">
                         <div class="text-align-left">
