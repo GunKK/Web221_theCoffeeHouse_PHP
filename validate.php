@@ -39,4 +39,19 @@ function checkPassword($password1, $password2)
     }
     return $error;
 }
+
+function checkEmailExist($email) {
+    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
+    $conn->error;
+    if ($conn->error) {
+        die('Kết nối thất bại'.$conn->error);
+    }
+    $error = "";
+    $sql = "SELECT email FROM user WHERE email='$email'";
+    $user = $conn->query($sql);
+    if ($user->num_rows > 0) {
+        $error = "Email đã tồn tại.";
+    }
+    return $error;
+}
 ?>
