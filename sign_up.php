@@ -10,6 +10,12 @@ if ($conn->error) {
 <?php
     require("./validate.php");
     $status = "";
+    $name = '';
+    $email = '';
+    $phone = '';
+    $address = '';
+    $password = '';
+    $re_password = '';
     if (isset($_POST['register'])) {
         $is_validated = true;
         $errorEmail = $errorPhone = $errorPassword = $errorRePassword = "";
@@ -106,7 +112,7 @@ if ($conn->error) {
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
               <div id="emailHelpBlock" class="form-text text-danger">
-                <?php echo $errorEmail ?>
+                <?php if (isset($errorEmail)) echo $errorEmail ?>
               </div>
             </div>
 
@@ -118,7 +124,7 @@ if ($conn->error) {
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
                 <div id="phoneHelpBlock" class="form-text text-danger">
-                  <?php echo $errorPhone ?>
+                  <?php if(isset($errorPhone)) echo $errorPhone ?>
                 </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-2">
@@ -135,7 +141,7 @@ if ($conn->error) {
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
                 <div id="passwordHelpBlock" class="form-text text-danger">
-                  <?php echo $errorPassword ?>
+                  <?php if(isset($errorPassword)) echo $errorPassword ?>
                 </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
@@ -146,7 +152,7 @@ if ($conn->error) {
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
                 <div id="rePasswordHelpBlock" class="form-text text-danger">
-                  <?php echo $errorRePassword ?>
+                  <?php if(isset($errorRePassword)) echo $errorRePassword ?>
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

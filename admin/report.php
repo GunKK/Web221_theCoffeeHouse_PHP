@@ -25,11 +25,10 @@ $dataCountProduct = $conn->query($sqlProduct);
 $dataCountProduct = $dataCountProduct->fetch_array();
 $countProduct = $dataCountProduct['count'];
 // doanh thu
-$sqlOrder = "SELECT count(*) as count FROM `assignmentweb`.`order` WHERE status = 'Đã giao'";
+$sqlOrder = "SELECT sum(payment) as count FROM `assignmentweb`.`order` WHERE status = 'Đã giao'";
 $dataRevenue = $conn->query($sqlOrder);
 $dataRevenue = $dataRevenue->fetch_array();
 $revenue = $dataRevenue['count'];
-$revenue = floor($revenue / 1000000)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +76,7 @@ $revenue = floor($revenue / 1000000)
             <div class="card bg-warning">
                 <div class="card-body">
                 <h5 class="card-title text-light" style="font-size: 40px;"><b><?=$revenue?></b></h5>
-                    <p class="card-text text-light" style="font-size: 20px;">Doanh thu (triệu)</p>
+                    <p class="card-text text-light" style="font-size: 20px;">Doanh thu (VND)</p>
                 </div>
             </div>
         </div>
