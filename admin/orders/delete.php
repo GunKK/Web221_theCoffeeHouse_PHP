@@ -1,23 +1,23 @@
 <?php
     session_start();
     ob_start();
-    $rootPath = '/AssignmentWeb/customer';
+    $rootPath = '/AssignmentWeb/admin';
     $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
     if ($conn->connect_error) {
-        die("có lôi xảy ra".$conn->connect_error);
+        die("có lỗi xảy ra".$conn->connect_error);
     } 
   
     if (isset($_GET['id'])) {
         settype($_GET['id'], 'int');
-        if ($_GET['id'] == 0) header('location: /AssignmentWeb/404.php');
-        $reviewId = $_GET['id'];
-        $sqlDelete = "DELETE FROM review WHERE review_id = '$reviewId'";
+        if ($_GET['id'] == 0) header('location: ../../404.php');
+        $orderId = $_GET['id'];
+        $sqlDelete = "DELETE FROM `assignmentweb`.`order` WHERE order_id = '$orderId'";
         $conn->query($sqlDelete);
         $conn->close();
         setcookie('thongBao', 'Đã xóa thành công', time()+5);
-        header("location: /AssignmentWeb/product.php");
+        header("location: index.php");
     } else {
         $conn->close();
-        header('location: /AssignmentWeb/404.php');
+        header('location: ../../404.php');
     }
 ?>

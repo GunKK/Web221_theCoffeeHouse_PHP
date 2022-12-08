@@ -252,7 +252,7 @@ if ($product->num_rows > 0) {
                             <span class="text-success"><?=$row['title']?></span>:
                             <?=$row['content']?>
                         </p>
-                        <p class="ms-2"><i class="fa-light fa-clock"></i> <small><?=$row['times']?></small></p>
+                        <p class="ms-2"><i class="fa-light fa-clock"></i> <small><?=$row['updated_at']?></small></p>
                     </div>
                 </div>
             <?php
