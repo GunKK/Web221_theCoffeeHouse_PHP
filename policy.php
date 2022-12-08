@@ -29,7 +29,8 @@ if ($conn->error) {
 
 <div class="container pt-5 pb-5">
     <div class="row">
-        <div class="col-xl-9 col-md-8 col-sm-6">
+        <!-- <div class="col-xl-9 col-md-8 col-sm-6"> -->
+        <div class="col-lg-9 col-md-10 m-auto">
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
@@ -82,7 +83,7 @@ if ($conn->error) {
                                     <tr>
                                         <td scope="row">OCB</td>
                                         <td>0999.888.418.888</td>
-                                        <td>Minh Lý Gia Huy</td>
+                                        <td>Lý Gia Huy</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -110,11 +111,11 @@ if ($conn->error) {
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-4 d-none d-md-block d-xl-block d-xxl-none"> 
+        <!-- <div class="col-xl-3 col-md-4 d-none d-md-block d-xl-block d-xxl-none"> 
             <img src="<?php echo $rootPath?>/public/img/logo.jpg" class="img-fluid mb-2 rounded" alt="">
             <img src="<?php echo $rootPath?>/public/img/logo.jpg" class="img-fluid mb-2 rounded" alt="">
             <img src="<?php echo $rootPath?>/public/img/logo.jpg" class="img-fluid mb-2 rounded" alt="">
-        </div>
+        </div> -->
     </div>
 </div>
 

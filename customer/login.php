@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-$rootPath = '/AssignmentWeb/customer';
+$rootPath = '/AssignmentWeb/';
 if (isset($_SESSION['email_user']) && !empty($_SESSION['email_user'])) {
   if (isset($_SESSION['cart']) && !empty($_SESSION['cart']))
     header('location: check_out.php');
@@ -31,6 +31,7 @@ $ketqua = $conn->query($sql);
 <body>
 <?php 
     require '../includes/header.php';
+    require '../includes/navbar.php';
 ?>
 
 <?php
@@ -65,8 +66,7 @@ if (isset($_POST['login_user'])) {
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
           <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"> 
-            <a href="/AssignmentWeb/" class="btn btn-secondary">Home</a>
-            Login User
+            Đăng nhập 
           </p>
           <form class="mx-1 mx-md-4" action="<?php echo $_SERVER['PHP_SELF']?>" accept-charset="UTF-8" method="post">
             <div class="d-flex flex-row align-items-center mb-4">
@@ -82,8 +82,8 @@ if (isset($_POST['login_user'])) {
               </div>
             </div>
             <p>
-              Bạn chưa có tài khoản 
-              <a href="/AssignmentWeb/sign_up.php">đăng kí ngay</a>
+              Bạn chưa có tài khoản?
+              <a href="/AssignmentWeb/sign_up.php">Đăng kí ngay.</a>
             </p>
                 <?php 
                     if(!empty($tb)) {
@@ -96,7 +96,7 @@ if (isset($_POST['login_user'])) {
         </form>        
     </div>
         <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-center order-1 order-lg-2">
-          <img class="img-fluid rounded w-75" alt="Login image" src="../public/img/logo.jpg" />
+          <img class="img-fluid rounded w-75" alt="Login image" src="../public/img/login.png" />
         </div>
       </div>
     </div>
