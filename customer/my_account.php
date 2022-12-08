@@ -8,21 +8,33 @@
     if ($conn->error) {
         die('Kết nối thất bại'.$conn->error);
     } 
-    $status = "";
 ?>
 
 <?php
+    require("../validate.php");
+    $status = "";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $is_validated = true;
+        $errorPhone = "";
+
         $name = $_POST['name'];
         $email = $_SESSION['email_user'];
         $address = $_POST['address'];
         $phone = $_POST['phone'];
-        $sql = "UPDATE `user` SET name='$name', address = '$address', phone = '$phone' WHERE email='$email';";
-        if ($conn->query($sql) === TRUE) {
-            echo "User successfully updated";
-            $status = "Đã cập nhật thành công.";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+
+        if (validatePhone($phone) != "") {
+            $is_validated = false;
+            $errorPhone = validatePhone($phone);
+        }
+        
+        if ($is_validated) {
+            $sql = "UPDATE `user` SET name='$name', address = '$address', phone = '$phone' WHERE email='$email';";
+            if ($conn->query($sql) === TRUE) {
+                echo "User successfully updated";
+                $status = "Đã cập nhật thành công.";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
         }
     }
     
@@ -57,7 +69,13 @@
 <div class="container-fluid bg-light p-xxl-5 p-md-3">
     <div class="col-lg-8 col-md-10 m-auto py-5 px-3" style="box-shadow: 0 10px 20px rgb(0 0 0 / 10%);">
         <h1 class="h1 text-center">Thông tin tài khoản</h1>
-        <p class="text-center text-danger"><?php echo $status?></p>
+        <?php
+            if ($status != "") {
+              echo '<div class="alert alert-success" role="alert">
+                '.$status.'
+              </div>';
+            }
+        ?>
         <form class="mx-5" method="post" action="my_account.php">
             <div class="mb-3">
                 <label for="Name" class="form-label">Tên khách hàng</label>
@@ -83,7 +101,6 @@
 <?php
     require '../includes/footer.php';
 ?>
-<!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
