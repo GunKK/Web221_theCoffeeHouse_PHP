@@ -15,13 +15,17 @@ if ($conn->error) {
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $message = mysqli_real_escape_string($conn, $_POST['message']);
-        $sql = "INSERT INTO contact (username, email, message) VALUES ('$name', '$email', '$message')";
-        
-        if ($conn->query($sql) === TRUE) {
-            echo "Send message successfully";
-            $status = "Cảm ơn bạn đã liên hệ với chúng tôi. <br> Chúng tôi sẽ phản hồi cho bạn trong thời gian sớm nhất.";
+        if ($name =='' || $email =='' || $message == '') {
+            $status = 'Vui lòng điền các trường còn thiếu';
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            $sql = "INSERT INTO contact (username, email, message) VALUES ('$name', '$email', '$message')";
+            
+            if ($conn->query($sql) === TRUE) {
+                echo "Send message successfully";
+                $status = "Cảm ơn bạn đã liên hệ với chúng tôi. <br> Chúng tôi sẽ phản hồi cho bạn trong thời gian sớm nhất.";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
         }
     }
 ?>

@@ -89,21 +89,21 @@
                 <label for="Name" class="form-label">Mật khẩu cũ</label>
                 <input type="password" name="old-password" class="form-control">
                 <div class="form-text text-danger">
-                  <?php echo $errorPassword ?>
+                  <?php if (isset($errorPassword)) echo $errorPassword ?>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Mật khẩu mới</label>
                 <input type="password" name="new-password" class="form-control">
                 <div class="form-text text-danger">
-                  <?php echo $errorRePassword1 ?>
+                  <?php if(isset($errorRePassword1)) echo $errorRePassword1 ?>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nhập lại mật khẩu mới</label>
                 <input type="password" name="new-password2" class="form-control">
                 <div class="form-text text-danger">
-                  <?php echo $errorRePassword2 ?>
+                  <?php if(isset($errorRePassword2)) echo $errorRePassword2 ?>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary float-end">Cập nhật</button>
