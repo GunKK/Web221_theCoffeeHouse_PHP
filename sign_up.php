@@ -94,20 +94,21 @@ if ($conn->error) {
               </div>';
             }
           ?>
-          
-          <form class="mx-1 mx-md-4" action="" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="8Fbe9hfBpqPx_ZXk5jR5LonDJ4lV50D91z39EZ8jJnh7iC7OsaO3pW-TdTF4w0Wo26rlq0fKTCbtgw8ETwu1NQ" autocomplete="off" />
+          <form class="mx-1 mx-md-4 form" id="form" action="" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="8Fbe9hfBpqPx_ZXk5jR5LonDJ4lV50D91z39EZ8jJnh7iC7OsaO3pW-TdTF4w0Wo26rlq0fKTCbtgw8ETwu1NQ" autocomplete="off" />
             
-            <div class="d-flex flex-row align-items-center mb-2">
+            <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-user"></i></span>
-                <input type="text" name="name"  class="form-control" placeholder="Username" value='<?php echo $name?>'>
+                <input id="name" type="text" name="name"  class="form-control" placeholder="Username" value='<?php echo $name?>'>
+                <small>Error message</small>
               </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-1">
+            <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-envelope"></i></span>
-                <input type="text" name="email" class="form-control" placeholder="Email" value='<?php echo $email?>'>
+                <input id="email" type="text" name="email" class="form-control" placeholder="Email" value='<?php echo $email?>'>
+                <small>Error message</small>
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
@@ -116,10 +117,11 @@ if ($conn->error) {
               </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-1">
+            <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-phone"></i></span>
-                <input type="text" name="phone" class="form-control" placeholder="Phone" value='<?php echo $phone?>'>
+                <input id="phone" type="text" name="phone" class="form-control" placeholder="Phone" value='<?php echo $phone?>'>
+                <small>Error message</small>
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
@@ -127,16 +129,17 @@ if ($conn->error) {
                   <?php if(isset($errorPhone)) echo $errorPhone ?>
                 </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-2">
+            <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-house"></i></span>
                 <input type="text" name="address" class="form-control" placeholder="Address" value='<?php echo $address?>'>
               </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-2">
+            <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                <input type="password" name="password" class="form-control" placeholder="Password" value='<?php echo $password?>'>
+                <input id="password" type="password" name="password" class="form-control" placeholder="Password" value='<?php echo $password?>'>
+                <small>Error message</small>
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
@@ -144,10 +147,11 @@ if ($conn->error) {
                   <?php if(isset($errorPassword)) echo $errorPassword ?>
                 </div>
             </div>
-            <div class="d-flex flex-row align-items-center mb-1">
+            <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-key"></i></span>
-                <input type="password" name="re_password" class="form-control" placeholder="Re-Password" value='<?php echo $re_password?>'>
+                <input id="password2" type="password" name="re_password" class="form-control" placeholder="Re-Password" value='<?php echo $re_password?>'>
+                <small>Error message</small>
               </div>
             </div>
             <div class="d-flex flex-row align-items-center mb-1">
@@ -172,6 +176,7 @@ if ($conn->error) {
     require './includes/footer.php';
 ?>
 <!-- JavaScript Bundle with Popper -->
+<script src="./public/javascripts/validate.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

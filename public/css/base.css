@@ -24,3 +24,26 @@
     transition: linear 0.3s;
 }
 
+.form-control.success input {
+	border-color: #2ecc71 !important;
+}
+
+.form-control.error input {
+	border-color: #e74c3c !important;
+}
+
+.input-group.flex-nowrap {
+	position: relative!important;
+}
+
+small {
+	color: #e74c3c;
+	position: absolute!important;
+	bottom: -27gpx !important;
+	left: 0 !important;
+	visibility: hidden !important;
+}
+
+small.error {
+	visibility: visible !important;
+}
