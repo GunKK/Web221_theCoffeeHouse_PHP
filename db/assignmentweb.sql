@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2022 at 04:50 PM
+-- Generation Time: Dec 09, 2022 at 06:20 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -43,7 +43,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`admin_id`, `email`, `password`, `name`, `role`, `updated_at`) VALUES
 (1, 'hau.nguyenbk8786@gmail.com', '1bbd886460827015e5d605ed44252251', 'NDucHau', 0, '2022-11-03 01:16:07'),
 (2, 'hau.nguyenbk19@hcmut.edu.vn', 'bae5e3208a3c700e3db642b6631e95b9', 'NDucHau_NV', 1, '2022-11-03 01:17:08'),
-(3, 'admin@gmail.com', '', 'Admin', 0, '2022-12-07 08:01:00');
+(3, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 0, '2022-12-08 18:34:23');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`order_id`, `user_id`, `payment_method`, `payment`, `address_receiver`, `phone_receiver`, `updated_at`, `status`, `name_receiver`) VALUES
-(1, 2, 'Tiền mặt khi nhận hàng', 122000, 'Kí túc xá khu B, Đông Hòa, Dĩ An, Bình Dương', '0382848786', '2022-12-07 11:19:20', 'Đang xử lý', 'Nguyễn Văn An');
+(2, 4, 'Tiền mặt khi nhận hàng', 29000, 'sadasd', 'ádasd', '2022-12-08 17:16:49', 'Đang xử lý', 'sad');
 
 -- --------------------------------------------------------
 
@@ -136,9 +136,7 @@ CREATE TABLE `order_item` (
 --
 
 INSERT INTO `order_item` (`order_id`, `product_id`, `quantity_item`, `price`) VALUES
-(1, 2, 2, 29000),
-(1, 3, 1, 35000),
-(1, 4, 1, 29000);
+(2, 4, 1, 29000);
 
 -- --------------------------------------------------------
 
@@ -247,9 +245,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `phone`, `address`, `updated_at`) VALUES
-(1, 'huylg2109@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Huy', '0855994282', 'KTX Khu A DHQGTPHCM', '2022-12-08 06:59:35'),
-(2, 'hau.nguyenbk8786@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'User', '0123456789', 'KTX Khu B ĐHQGTPHCM', '2022-12-07 11:18:23'),
-(3, 'hau.nguyenbk19@hcmut.edu.vn', '25f9e794323b453885f5181f1b624d0b', 'Hậu', '0382848786', 'Hồ Chí Minh', '2022-12-07 11:03:15');
+(1, 'huylg2109@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Huy', '0855994282', 'Hồ Chí Minh', '2022-12-08 18:35:22'),
+(3, 'hau.nguyenbk19@hcmut.edu.vn', '25f9e794323b453885f5181f1b624d0b', 'Hậu', '0382848786', 'Hồ Chí Minh', '2022-12-07 11:03:15'),
+(4, 'huan@gmail.com', '245605689b9e8d33744686a86819040b', 'Huan Nguyen', '0457237111', 'Đà Lạt', '2022-12-08 21:17:15'),
+(5, 'duc@gmail.com', '1bbd886460827015e5d605ed44252251', 'Duc Nguyen', '0293247821', 'Rạch Giá', '2022-12-08 18:34:55'),
+(6, 'vinh@gmail.com', '1bbd886460827015e5d605ed44252251', 'Vinh', '0293247821', 'Bến Tre', '2022-12-08 19:10:57'),
+(7, 'quan@gmail.com', '1bbd886460827015e5d605ed44252251', 'Quân', '0293437821', 'An Giang', '2022-12-08 19:12:44');
 
 --
 -- Indexes for dumped tables
@@ -340,7 +341,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -364,7 +365,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
