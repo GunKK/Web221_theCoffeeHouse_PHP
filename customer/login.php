@@ -13,9 +13,6 @@ $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
 if ($conn->connect_error) {
     die("có lôi xảy ra".$conn->connect_error);
 } 
-
-$sql = "SELECT email, password FROM user";
-$ketqua = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,29 +32,56 @@ $ketqua = $conn->query($sql);
 ?>
 
 <?php
-
-$tb = '';
+require("../validate.php");
+// $tb = '';
 $email ='';
 $password ='';
 
 if (isset($_POST['login_user'])) {
+    
+
+    $is_validated = true;
+    $errorEmail = $errorPassword = "";
     $email = $_POST['email'];
     $password = $_POST['password'];
     $hash_password = md5($password);
-    if ($email =='' || $password =='') {
-      $tb = 'Vui lòng điền các ô còn thiếu';
-    } else {
-      while ($row = $ketqua->fetch_assoc()) {
-          if($row["email"] == $email && $row["password"] == $hash_password) {
-              $_SESSION["email_user"] = $email;
-              if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
-                header('location: check_out.php');
-              else
-                header('location: my_account.php');
-          }
-          else $tb = 'Sai email hoặc mật khẩu'; 
-      }
+    if (checkEmailExist($email) == ""){
+      $is_validated = false;
+      $errorEmail = "Email không tồn tại";
     }
+
+    $sql = "SELECT password FROM user WHERE email = '$email'";
+    $ketqua = $conn->query($sql);
+    $my_password = $ketqua->fetch_array()["password"];
+    if ($my_password != $hash_password) {
+      $is_validated = false;
+      $errorPassword = "Nhập mật khẩu không đúng";
+    }
+    // if ($email == "" || $password == "") {
+    //   $is_validated = false;
+    //   $tb = "Vui lòng nhập các ô còn thiếu";
+    // }
+    if ($is_validated) {
+    $_SESSION["email_user"] = $email;
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
+      header('location: check_out.php');
+    else
+      header('location: my_account.php');
+    }
+    // if ($email =='' || $password =='') {
+    //   $tb = 'Vui lòng điền các ô còn thiếu';
+    // } else {
+    //   while ($row = $ketqua->fetch_assoc()) {
+    //       if($row["email"] == $email && $row["password"] == $hash_password) {
+    //           $_SESSION["email_user"] = $email;
+    //           if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
+    //             header('location: check_out.php');
+    //           else
+    //             header('location: my_account.php');
+    //       }
+    //       else $tb = 'Sai email hoặc mật khẩu'; 
+    //   }
+    // }
 }
 ?>
 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -86,9 +110,15 @@ if (isset($_POST['login_user'])) {
               <a href="/AssignmentWeb/sign_up.php">Đăng kí ngay.</a>
             </p>
                 <?php 
-                    if(!empty($tb)) {
-                        echo '<div class="alert alert-danger">'.$tb. '</div>';
-                    }
+                    if(!empty($errorEmail)) {
+                        echo '<div class="alert alert-danger">'.$errorEmail. '</div>';
+                    } else if (!empty($errorPassword)) {
+                      echo '<div class="alert alert-danger">'.$errorPassword. '</div>';
+                    } 
+
+                ?>
+                <?php 
+                    
                 ?>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
               <input type="submit" name="login_user" value="Login" class="btn btn-primary" data-disable-with="Create account" />

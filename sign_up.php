@@ -84,7 +84,7 @@ if ($conn->error) {
     require './includes/navbar.php';
 ?>
 
-<div class="row d-flex justify-content-center align-items-center h-100">
+<div class="row d-flex justify-content-center align-items-center h-100 m-sm-5">
   <div class="col-lg-12 col-xl-11">
     <div class="card-body p-md-5">
       <div class="row justify-content-center">
@@ -173,7 +173,7 @@ if ($conn->error) {
 
           </form>        
         </div>
-        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-center order-1 order-lg-2">
+        <div class="col-md-10 col-lg-6 col-xl-7 d-flex d-none d-xl-flex align-items-center justify-content-center order-1 order-lg-2">
           <img class="img-fluid rounded w-75" alt="Signup image" src="<?php echo $rootPath;?>/public/img/signup_img.png" />
         </div>
       </div>
