@@ -18,7 +18,7 @@ if ($conn->error) {
     $re_password = '';
     if (isset($_POST['register'])) {
         $is_validated = true;
-        $errorEmail = $errorPhone = $errorPassword = $errorRePassword = "";
+        $errorName = $errorEmail = $errorPhone = $errorPassword = $errorRePassword = "";
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
@@ -26,6 +26,10 @@ if ($conn->error) {
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $re_password = mysqli_real_escape_string($conn, $_POST['re_password']);
         
+        if($name == "") {
+          $is_validated = false;
+          $errorName = "Name không được để trống.";
+        }
         if (checkEmailExist($email) != ""){
           $is_validated = false;
           $errorEmail = checkEmailExist($email);
@@ -103,7 +107,11 @@ if ($conn->error) {
                 <small>Error message</small>
               </div>
             </div>
-
+            <div class="d-flex flex-row align-items-center mb-1">
+              <div id="nameHelpBlock" class="form-text text-danger">
+                <?php if (isset($errorName)) echo $errorName ?>
+              </div>
+            </div>
             <div class="d-flex flex-row align-items-center mb-4">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="fa-light fa-envelope"></i></span>
@@ -176,7 +184,7 @@ if ($conn->error) {
     require './includes/footer.php';
 ?>
 <!-- JavaScript Bundle with Popper -->
-<script src="./public/javascripts/validate.js"></script>
+<!-- <script src="./public/javascripts/validate.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
