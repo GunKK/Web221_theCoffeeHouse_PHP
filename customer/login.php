@@ -36,6 +36,7 @@ require("../validate.php");
 // $tb = '';
 $email ='';
 $password ='';
+$tb ='';
 
 if (isset($_POST['login_user'])) {
     
@@ -57,10 +58,10 @@ if (isset($_POST['login_user'])) {
       $is_validated = false;
       $errorPassword = "Nhập mật khẩu không đúng";
     }
-    // if ($email == "" || $password == "") {
-    //   $is_validated = false;
-    //   $tb = "Vui lòng nhập các ô còn thiếu";
-    // }
+    if ($email == "" || $password == "") {
+      $is_validated = false;
+      $tb = "Vui lòng nhập các ô còn thiếu";
+    }
     if ($is_validated) {
     $_SESSION["email_user"] = $email;
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
@@ -110,7 +111,10 @@ if (isset($_POST['login_user'])) {
               <a href="/AssignmentWeb/sign_up.php">Đăng kí ngay.</a>
             </p>
                 <?php 
-                    if(!empty($errorEmail)) {
+                    if(!empty($tb)) {
+                      echo '<div class="alert alert-danger">'.$tb. '</div>';
+                    }
+                    else if(!empty($errorEmail)) {
                         echo '<div class="alert alert-danger">'.$errorEmail. '</div>';
                     } else if (!empty($errorPassword)) {
                       echo '<div class="alert alert-danger">'.$errorPassword. '</div>';
