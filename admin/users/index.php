@@ -6,7 +6,7 @@
       header('location: ../login.php');
   }
 
-  $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
+  require_once '../../db/DB.php';
 
   $sqlShowUser = "SELECT * FROM user";
   $users = $conn->query($sqlShowUser);

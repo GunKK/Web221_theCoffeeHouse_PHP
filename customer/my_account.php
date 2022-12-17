@@ -3,11 +3,7 @@
     ob_start();
     $rootPath = '/AssignmentWeb';
     if (!isset($_SESSION['email_user']) && empty($_SESSION['email_user']) ) header('location: login.php');
-    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-    $conn->error;
-    if ($conn->error) {
-        die('Kết nối thất bại'.$conn->error);
-    } 
+    require_once '../db/DB.php';
 ?>
 
 <?php

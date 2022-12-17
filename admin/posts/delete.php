@@ -2,11 +2,7 @@
 session_start();
 $id = $_POST['id'];
 
-$server = 'localhost';
-$dbname = 'assignmentWeb';
-$user = 'root';
-$pass = '';
-$conn = new mysqli($server, $user, $pass, $dbname);
+require_once '../../db/DB.php';
 $query = "DELETE FROM `post` WHERE post_id='" . $id . "'";
 
 

@@ -2,11 +2,7 @@
 session_start();
 ob_start();
 $rootPath = '/AssignmentWeb/admin';
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-$conn->error;
-if ($conn->error) {
-    die('Kết nối thất bại'.$conn->error);
-} 
+require_once '../../db/DB.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

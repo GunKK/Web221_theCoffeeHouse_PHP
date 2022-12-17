@@ -2,10 +2,7 @@
     ob_start();
     session_start();
     $rootPath = '/AssignmentWeb';
-    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-    if ($conn->error) {
-        die("Có lỗi xảy ra ". $conn->error);
-    }
+    require_once './db/DB.php';
     
     if (isset($_GET['productId'])) {
         settype($_GET['productId'], 'int');

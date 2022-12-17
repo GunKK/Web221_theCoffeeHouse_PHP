@@ -9,10 +9,7 @@ if (isset($_SESSION['email_user']) && !empty($_SESSION['email_user'])) {
     header('location: my_account.php');
 }
 
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-if ($conn->connect_error) {
-    die("có lôi xảy ra".$conn->connect_error);
-} 
+require_once '../db/DB.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

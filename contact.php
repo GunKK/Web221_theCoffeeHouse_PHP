@@ -2,11 +2,7 @@
 session_start();
 ob_start();
 $rootPath = '/AssignmentWeb';
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-$conn->error;
-if ($conn->error) {
-    die('Kết nối thất bại'.$conn->error);
-} 
+require_once './db/DB.php';
 ?>
 
 <?php
@@ -85,6 +81,7 @@ if ($conn->error) {
 <!-- end contact page -->
 
 <?php
+$conn->close();
     require './includes/footer.php';
 ?>
 <!-- JavaScript Bundle with Popper -->

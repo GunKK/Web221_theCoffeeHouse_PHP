@@ -2,10 +2,7 @@
 session_start();
 ob_start();
 $rootPath = '/AssignmentWeb/admin';
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-if ($conn->connect_error) {
-    die("có lôi xảy ra".$conn->connect_error);
-} 
+require_once '../db/DB.php';
 
 $sql = "SELECT email, password FROM admin";
 $ketqua = $conn->query($sql);

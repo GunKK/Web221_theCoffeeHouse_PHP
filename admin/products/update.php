@@ -6,10 +6,7 @@ if (!isset($_SESSION["email_ad"])) {
     header('location: login.php');
 }
 
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-if ($conn->connect_error) {
-    die("Có lỗi xảy ra". $conn->connect_error);
-}
+require_once '../../db/DB.php';
 
 // lấy productId
 if (isset($_GET['id'])) {

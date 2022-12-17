@@ -4,7 +4,7 @@
     $rootPath = '/AssignmentWeb';
     // nếu khách hàng chưa đăng nhập thì chuyển đến trang đăng nhập
     if (!isset($_SESSION['email_user']) && empty($_SESSION['email_user']) ) header('location: login.php');
-    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
+    require_once '../db/DB.php';
     $email = mysqli_real_escape_string($conn,$_SESSION['email_user']);
     if ($conn->connect_error) {
         die("có lỗi xảy ra".$conn->connect_error);

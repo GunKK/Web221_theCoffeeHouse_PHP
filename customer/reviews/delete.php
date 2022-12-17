@@ -2,10 +2,7 @@
     session_start();
     ob_start();
     $rootPath = '/AssignmentWeb/customer';
-    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-    if ($conn->connect_error) {
-        die("có lôi xảy ra".$conn->connect_error);
-    } 
+    require_once '../../db/DB.php';
   
     if (isset($_GET['id'])) {
         settype($_GET['id'], 'int');

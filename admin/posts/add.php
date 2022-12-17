@@ -1,10 +1,5 @@
 <?php
-$server = 'localhost';
-$dbname = 'assignmentWeb';
-$user = 'root';
-$pass = '';
-$conn = new mysqli($server, $user, $pass, $dbname);
-
+require_once '../../db/DB.php';
 $title = $_POST['title'];
 $content = $_POST['content'];
 $image = $_POST['image'];

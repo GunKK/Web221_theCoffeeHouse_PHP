@@ -4,11 +4,7 @@ $rootPath = '/AssignmentWeb/admin';
 if (!isset($_SESSION["email_ad"])) {
     header('location: login.php');
 }
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-$conn->error;
-if ($conn->error) {
-    die('Kết nối thất bại'.$conn->error);
-} 
+require_once '../db/DB.php';
 
 	$email = $_SESSION["email_ad"];
 	$email = mysqli_real_escape_string($conn, $email);

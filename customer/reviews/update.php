@@ -2,10 +2,7 @@
     session_start();
     ob_start();
     $rootPath = '/AssignmentWeb/customer';
-    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-    if ($conn->connect_error) {
-        die("có lỗi xảy ra".$conn->connect_error);
-    }
+    require_once '../../db/DB.php';
     if (isset($_POST['update'])) {
         $reviewId = mysqli_real_escape_string($conn, $_POST['reviewId']);
         $title = mysqli_real_escape_string($conn, $_POST['title']);

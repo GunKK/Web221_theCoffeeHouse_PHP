@@ -1,9 +1,7 @@
 <?php
-$server = 'localhost';
-$dbname = 'assignmentWeb';
-$user = 'root';
-$pass = '';
-$conn = new mysqli($server, $user, $pass, $dbname);
+ob_start();
+session_start();
+require_once '../../db/DB.php';
 $id = $_POST['id'];
 $title = $_POST['title'];
 $content = $_POST['content'];

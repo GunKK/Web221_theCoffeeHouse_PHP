@@ -2,7 +2,7 @@
 session_start();
 $id = $_POST['id'];
 
-$conn = @new mysqli("localhost", "root", "", "assignmentWeb");
+require_once '../../db/DB.php';
 $query = "DELETE FROM `user` WHERE user_id='" . $id . "'";
 
 if ($conn->query($query) === TRUE) {

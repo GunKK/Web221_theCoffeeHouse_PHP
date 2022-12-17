@@ -6,7 +6,7 @@
       header('location: ../login.php');
   }
 
-  $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
+  require_once '../../db/DB.php';
 
   $sqlShowContact = "SELECT * FROM contact";
   $contacts = $conn->query($sqlShowContact);

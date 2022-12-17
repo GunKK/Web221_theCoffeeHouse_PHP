@@ -2,10 +2,7 @@
     session_start();
     ob_start();
     $rootPath = '/AssignmentWeb';
-    $conn = @new mysqli("localhost", "root", "", "assignmentWeb");
-    if ($conn->error) {
-        die('Kết nối thất bại'.$conn->error);
-    } 
+    require_once './db/DB.php';
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
         settype($_GET['id'], 'int');
