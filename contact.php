@@ -97,9 +97,7 @@ $conn->close();
             data: {
             },
             success: function (data) {
-                var cart = document.getElementById("cart");
                 var headerCart = document.getElementById("headerCart");
-                cart.innerHTML = data.cart;
                 headerCart.innerHTML = data.headerCart;
             },
             error: function (e) {

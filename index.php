@@ -195,28 +195,26 @@ require_once './db/DB.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
     function loadCartAjax() {
-    $.ajax({
-        url: "<?=$rootPath?>/ajax/loadCart.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-        },
-        success: function (data) {
-            var cart = document.getElementById("cart");
-            var headerCart = document.getElementById("headerCart");
-            cart.innerHTML = data.cart;
-            headerCart.innerHTML = data.headerCart;
-        },
-        error: function (e) {
-            console.log(e.message);
-            throw e;
-        }
-    });
-}
+        $.ajax({
+            url: "<?=$rootPath?>/ajax/loadCart.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+            },
+            success: function (data) {
+                var headerCart = document.getElementById("headerCart");
+                headerCart.innerHTML = data.headerCart;
+            },
+            error: function (e) {
+                console.log(e.message);
+                throw e;
+            }
+        });
+    }
 
-  $(document).ready(function() {
-      loadCartAjax();
-  });
+    $(document).ready(function() {
+        loadCartAjax();
+    });
 </script>
 </body>
 </html>
