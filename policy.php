@@ -144,6 +144,14 @@ $conn->close();
 
   $(document).ready(function() {
       loadCartAjax();
+
+      $(window).scroll(function(){
+            if($(this).scrollTop()>114){
+            $("#navbar-top").addClass('fix-nav')
+            }else{
+                $("#navbar-top").removeClass('fix-nav')
+            }}
+        )
   });
 </script>
 </body>
