@@ -139,7 +139,8 @@ require_once './db/DB.php';
                         </div>
                         <div class="card-footer d-flex flex-column">
                             <a href="<?php echo $rootPath?>/product_detail.php?productId=<?php echo $row['product_id']?>" class="btn btn-primary">Xem chi tiết</a>
-                            <a href="<?php echo $rootPath?>/process_cart.php?action=add&id=<?php echo $row['product_id']?>&quantity=1" class="btn btn-warning mt-1 <?php if ($row["quantity"] == 0) echo 'disabled'?>"><i class="fa-light fa-cart-plus"></i></a>
+                            <!-- <a href="<?php echo $rootPath?>/process_cart.php?action=add&id=<?php echo $row['product_id']?>&quantity=1" class="btn btn-warning mt-1 <?php if ($row["quantity"] == 0) echo 'disabled'?>"><i class="fa-light fa-cart-plus"></i></a> -->
+                            <button onclick="addCartItem(<?=$row['product_id']?>)" class="btn btn-warning mt-1 <?php if ($row["quantity"] == 0) echo 'disabled'?>"><i class="fa-light fa-cart-plus"></i></button>
                         </div>
                         </div>
                     </div>
@@ -213,5 +214,51 @@ require_once './db/DB.php';
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function loadCartAjax() {
+        $.ajax({
+            url: "<?=$rootPath?>/ajax/loadCart.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+            },
+            success: function (data) {
+                var cart = document.getElementById("cart");
+                var headerCart = document.getElementById("headerCart");
+                cart.innerHTML = data.cart;
+                headerCart.innerHTML = data.headerCart;
+            },
+            error: function (e) {
+                console.log(e.message);
+                throw e;
+            }
+        });
+    }
+
+    // tăng số lượng
+    function addCartItem(pId) {
+        var id = pId;
+        console.log(id);
+        $.ajax({
+            url: "<?=$rootPath?>/ajax/addCartItem.php",
+            type: "POST",
+            data: {
+                productId: id,
+            },
+            success: function (data) {
+                alert("Thêm sản phẩm thành công");
+                loadCartAjax();
+            },
+            error: function () {
+                alert("Lỗi thao tác");
+            }
+        });
+    }
+
+  $(document).ready(function() {
+      loadCartAjax();
+  });
+</script>
 </body>
 </html>
