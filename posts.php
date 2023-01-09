@@ -34,13 +34,6 @@ require_once './db/DB.php';
         <div class="col">
             <div class="container mb-5">  
                 <div class="row">
-                    <div class="d-flex justify-content-start me-4 mb-2">
-                        <!-- <button class="btn btn-outline-primary me-2" onclick="sortByTime()"><b>Mới nhất</b></button> -->
-                        <!-- <button class="btn btn-outline-primary me-2"><b></b></button>
-                        <button class="btn btn-outline-primary me-2"><b>Giá giảm dần</b></button> -->
-                    </div>
-                </div>    
-                <div class="row">
                     <?php
                     if ($posts->num_rows>0) {
                         $totalPosts = $posts->num_rows;
@@ -144,7 +137,30 @@ require_once './db/DB.php';
 <?php
     require './includes/footer.php';
 ?>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script>
+    function loadCartAjax() {
+        $.ajax({
+            url: "<?=$rootPath?>/ajax/loadCart.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+            },
+            success: function (data) {
+                var headerCart = document.getElementById("headerCart");
+                headerCart.innerHTML = data.headerCart;
+            },
+            error: function (e) {
+                console.log(e.message);
+                throw e;
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        loadCartAjax();
+    });
+</script>
 </body>
 </html>

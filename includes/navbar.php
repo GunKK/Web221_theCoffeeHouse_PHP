@@ -32,16 +32,7 @@
         </form>
         <ul class="nav navbar-nav pull-right">
           <li class="nav-item me-2">
-            <a href="<?php echo $rootPath?>/cart.php" class="btn btn-light">
-              <i class="fa-sharp fa-solid fa-bag-shopping"></i>
-                <?php
-                  if (isset($_SESSION['cart'])) {
-                    echo sizeof($_SESSION['cart']);
-                  } else {
-                    echo 0;
-                  }
-                ?>
-            </a>
+            <a href="<?php echo $rootPath?>/cart.php" class="btn btn-light" id="headerCart"></a>
           </li>
           <?php
             if (!isset($_SESSION['email_user'])) {
