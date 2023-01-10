@@ -28,6 +28,7 @@
           <div class="input-group flex-nowrap">
             <input class="form-control" type="search" name="key" placeholder="Search..." id="live-search" aria-label="Search" value="<?php if (!empty($_GET['key'])) echo $_GET['key']; ?>">
             <button class="btn btn-warning round-circle" type="submit"><i class="fa-regular fa-magnifying-glass text-white"></i></button>
+            <div id="live-search__result"></div>  
           </div>
         </form>
         <ul class="nav navbar-nav pull-right">

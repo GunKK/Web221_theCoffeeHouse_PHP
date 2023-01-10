@@ -22,7 +22,6 @@ require_once './db/DB.php';
     require './includes/header.php';
     require './includes/navbar.php';
 ?>
-<div id="live-search__result"></div>
 <?php
     $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
     if (isset($_GET['categoryId'])) {
@@ -208,25 +207,9 @@ require_once './db/DB.php';
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    function loadCartAjax() {
-        $.ajax({
-            url: "<?=$rootPath?>/ajax/loadCart.php",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-            },
-            success: function (data) {
-                var headerCart = document.getElementById("headerCart");
-                headerCart.innerHTML = data.headerCart;
-            },
-            error: function (e) {
-                console.log(e.message);
-                throw e;
-            }
-        });
-    }
+<script src="./public/javascripts/loadCartHeader.js"></script>
 
+<script>
     // tăng số lượng
     function addCartItem(pId) {
         var id = pId;
@@ -259,31 +242,7 @@ require_once './db/DB.php';
             )
     });
 
-    $('#live-search').keyup(function() {
-        key = $(this).val();
-        console.log(key);
-        if (key != '') {
-            $.ajax({
-                url: '<?=$rootPath?>/ajax/searchLive.php',
-                method: 'POST',
-                // dataType: 'json',
-                data: {
-                    key: key
-                },
-                success: function(data) {
-                    var liveSearch = document.getElementById("live-search__result");
-                    liveSearch.innerHTML = data;
-                },
-                error: function (e) {
-                    console.log(e.message);
-                    throw e;
-                }
-            });
-        } else {
-            var liveSearch = document.getElementById("live-search__result");
-            liveSearch.innerHTML = "Vui lòng nhập từ khóa";
-        }
-    });
 </script>
+<script src="./public/javascripts/liveSearch.js"></script>
 </body>
 </html>
