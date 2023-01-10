@@ -22,7 +22,7 @@ require_once './db/DB.php';
     require './includes/header.php';
     require './includes/navbar.php';
 ?>
-
+<div id="live-search__result"></div>
 <?php
     $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
     if (isset($_GET['categoryId'])) {
@@ -60,14 +60,7 @@ require_once './db/DB.php';
             </div>
         </div>
         <div class="col-xl-10 col-md-8 col-sm-6">
-            <div class="container mb-5">  
-                <div class="row">
-                    <!-- <div class="d-flex justify-content-start me-4 mb-2">
-                        <button class="btn btn-outline-primary me-2"><b>Hàng mới</b></button>
-                        <button class="btn btn-outline-primary me-2"><b>Giá tăng dần</b></button>
-                        <button class="btn btn-outline-primary me-2"><b>Giá giảm dần</b></button>
-                    </div> -->
-                </div>    
+            <div class="container mb-5">    
                 <div class="row">
                     <?php
                     if ($products->num_rows>0) {
@@ -216,7 +209,7 @@ require_once './db/DB.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-   function loadCartAjax() {
+    function loadCartAjax() {
         $.ajax({
             url: "<?=$rootPath?>/ajax/loadCart.php",
             type: 'POST',
@@ -254,17 +247,43 @@ require_once './db/DB.php';
         });
     }
 
-  $(document).ready(function() {
-        loadCartAjax();
-        
-        $(window).scroll(function(){
-            if($(this).scrollTop()>114){
-            $("#navbar-top").addClass('fix-nav')
-            }else{
-                $("#navbar-top").removeClass('fix-nav')
-            }}
-        )
-  });
+    $(document).ready(function() {
+            loadCartAjax();
+            
+            $(window).scroll(function(){
+                if($(this).scrollTop()>114){
+                $("#navbar-top").addClass('fix-nav')
+                }else{
+                    $("#navbar-top").removeClass('fix-nav')
+                }}
+            )
+    });
+
+    $('#live-search').keyup(function() {
+        key = $(this).val();
+        console.log(key);
+        if (key != '') {
+            $.ajax({
+                url: '<?=$rootPath?>/ajax/searchLive.php',
+                method: 'POST',
+                // dataType: 'json',
+                data: {
+                    key: key
+                },
+                success: function(data) {
+                    var liveSearch = document.getElementById("live-search__result");
+                    liveSearch.innerHTML = data;
+                },
+                error: function (e) {
+                    console.log(e.message);
+                    throw e;
+                }
+            });
+        } else {
+            var liveSearch = document.getElementById("live-search__result");
+            liveSearch.innerHTML = "Vui lòng nhập từ khóa";
+        }
+    });
 </script>
 </body>
 </html>
