@@ -25,7 +25,7 @@
           </li>
         </ul>
         <form action="<?php echo $rootPath?>/search.php" method="get" class="d-flex me-3" role="search">
-          <div class="input-group flex-nowrap">
+          <div class="input-group flex-nowrap search-top">
             <input class="form-control" type="search" name="key" placeholder="Search..." id="live-search" aria-label="Search" value="<?php if (!empty($_GET['key'])) echo $_GET['key']; ?>">
             <button class="btn btn-warning round-circle" type="submit"><i class="fa-regular fa-magnifying-glass text-white"></i></button>
             <div id="live-search__result"></div>  

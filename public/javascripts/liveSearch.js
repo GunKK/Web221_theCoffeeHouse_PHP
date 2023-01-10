@@ -20,6 +20,6 @@ $('#live-search').keyup(function() {
         });
     } else {
         var liveSearch = document.getElementById("live-search__result");
-        liveSearch.innerHTML = "Vui lòng nhập từ khóa";
+        liveSearch.innerHTML = "<div class='p-2'>Vui lòng nhập từ khóa</div>";
     }
 });

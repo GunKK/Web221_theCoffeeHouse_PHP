@@ -55,3 +55,23 @@ small.error {
     top: 0;
     left: 0;
 }
+
+#live-search:focus ~ #live-search__result {
+    display: block;
+}
+
+.live-search__result-link:hover {
+	background-color: #F7F7F7;
+}
+
+#live-search__result {
+	background-color: #fff;
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    width: 120%;
+    border-radius: 2px;
+    z-index: 10;
+	box-shadow: 0 1PX 1px rgb(0 0 0 );
+}
