@@ -2,6 +2,9 @@
     session_start();
     ob_start();
     $rootPath = '/AssignmentWeb';
+    require_once '../PHPMailer/src/Exception.php';
+    require_once '../PHPMailer/src/PHPMailer.php';
+    require_once '../PHPMailer/src/SMTP.php';
     include_once '../helper/sendMail.php';
 
     // nếu khách hàng chưa đăng nhập thì chuyển đến trang đăng nhập
@@ -105,7 +108,6 @@
 ?>
 
 <?php 
-$success = 1;
 // Nếu chưa có sản phẩm trong giỏ hàng thì hiển thị btn quay về trang sản phẩm
 if (empty($_SESSION['cart']) && isset($success)) {
 ?>
