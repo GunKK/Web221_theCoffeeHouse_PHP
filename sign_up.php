@@ -1,6 +1,12 @@
 <?php
 $rootPath = '/AssignmentWeb';
 require_once './db/DB.php';
+require_once './PHPMailer/src/Exception.php';
+require_once './PHPMailer/src/PHPMailer.php';
+require_once './PHPMailer/src/SMTP.php';
+
+include_once './helper/sendMail.php';
+
 ?>
 
 <?php
@@ -48,14 +54,23 @@ require_once './db/DB.php';
         }
         if ($is_validated) {
           $password = md5($password);
-          $sql = "INSERT INTO user (name, email, phone, address, password) VALUES ('$name', '$email', '$phone', '$address', '$password')";
-          
+          $verifyCode = substr(number_format(time() * rand(), 0, '', ''), 0, 9);
+          $sql = "INSERT INTO user (name, email, phone, address, password, verify_code) 
+                  VALUES ('$name', '$email', '$phone', '$address', '$password', '$verifyCode')";
+          $conn->query($sql);
           if ($conn->query($sql) === TRUE) {
-              // echo "Resgiter user successfully";
-              // header("Location: ./customer/login.php");
-              $status = "Đăng kí tài khoản thành công.";
+              // send mail 
+              $receiver = [
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+              ];
+              // print_r($receiver);
+              // exit;
+              verifyEmail($mail, $receiver, $verifyCode);
+              header("Location: ./auth/register.php?email=$email");
           } else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
+              echo "Error: ". $conn->error;
           }
         }   
     }
