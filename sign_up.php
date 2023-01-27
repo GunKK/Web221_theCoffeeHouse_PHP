@@ -53,11 +53,10 @@ include_once './helper/sendMail.php';
           $errorRePassword = "Nhập mật khẩu lần 2 không khớp.";
         }
         if ($is_validated) {
-          $password = md5($password);
+          $hashPassword = md5($password);
           $verifyCode = substr(number_format(time() * rand(), 0, '', ''), 0, 9);
           $sql = "INSERT INTO user (name, email, phone, address, password, verify_code) 
-                  VALUES ('$name', '$email', '$phone', '$address', '$password', '$verifyCode')";
-          $conn->query($sql);
+                  VALUES ('$name', '$email', '$phone', '$address', '$hashPassword', '$verifyCode')";
           if ($conn->query($sql) === TRUE) {
               // send mail 
               $receiver = [
