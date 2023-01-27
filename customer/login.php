@@ -102,6 +102,9 @@ if (isset($_POST['login_user'])) {
               Bạn chưa có tài khoản?
               <a href="/AssignmentWeb/sign_up.php">Đăng kí ngay.</a>
             </p>
+            <p class="mt-2 mb-2">
+              Quên mật khẩu <a href="/AssignmentWeb/auth/forgot_password.php">click here</a>
+            </p>
                 <?php 
                     if(!empty($tb)) {
                       echo '<div class="alert alert-danger">'.$tb. '</div>';
