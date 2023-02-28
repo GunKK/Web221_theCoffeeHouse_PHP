@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 09, 2022 at 06:20 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Feb 28, 2023 at 01:48 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `assignmentWeb`
+-- Database: `assignmentweb`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
   `name` varchar(50) NOT NULL,
   `role` int(11) NOT NULL DEFAULT 0,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -54,7 +54,7 @@ INSERT INTO `admin` (`admin_id`, `email`, `password`, `name`, `role`, `updated_a
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -81,7 +81,7 @@ CREATE TABLE `contact` (
   `message` varchar(2000) NOT NULL,
   `status` int(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact`
@@ -109,14 +109,7 @@ CREATE TABLE `order` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` enum('Đang xử lý','Đang giao','Đã giao') NOT NULL DEFAULT 'Đang xử lý',
   `name_receiver` varchar(50) NOT NULL DEFAULT 'Đang xử lý'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order`
---
-
-INSERT INTO `order` (`order_id`, `user_id`, `payment_method`, `payment`, `address_receiver`, `phone_receiver`, `updated_at`, `status`, `name_receiver`) VALUES
-(2, 4, 'Tiền mặt khi nhận hàng', 29000, 'sadasd', 'ádasd', '2022-12-08 17:16:49', 'Đang xử lý', 'sad');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,14 +122,7 @@ CREATE TABLE `order_item` (
   `product_id` int(11) NOT NULL,
   `quantity_item` bigint(20) NOT NULL DEFAULT 1,
   `price` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order_item`
---
-
-INSERT INTO `order_item` (`order_id`, `product_id`, `quantity_item`, `price`) VALUES
-(2, 4, 1, 29000);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -150,7 +136,7 @@ CREATE TABLE `post` (
   `content` text DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `image` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `post`
@@ -184,23 +170,23 @@ CREATE TABLE `product` (
   `price` bigint(20) NOT NULL,
   `price_sale` bigint(20) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`product_id`, `name`, `category_id`, `description`, `images`, `quantity`, `price`, `price_sale`, `timestamp`) VALUES
-(1, 'The Coffee House Sữa Đá', 1, 'Thức uống giúp tỉnh táo tức thì để bắt đầu ngày mới thật hứng khởi. Không đắng khét như cà phê truyền thống, The Coffee House Sữa Đá mang hương vị hài hoà đầy lôi cuốn. Là sự đậm đà của 100% cà phê Arabica Cầu Đất rang vừa tới, biến tấu tinh tế với sữa đặc và kem sữa ngọt ngào cực quyến rũ. Càng hấp dẫn hơn với topping thạch 100% cà phê nguyên chất giúp giữ trọn vị ngon đến ngụm cuối cùng.', 'coffeeSuaDa.jpg', 0, 39000, 25000, '2022-12-07 16:24:59'),
+(1, 'The Coffee House Sữa Đá', 1, 'Thức uống giúp tỉnh táo tức thì để bắt đầu ngày mới thật hứng khởi. Không đắng khét như cà phê truyền thống, The Coffee House Sữa Đá mang hương vị hài hoà đầy lôi cuốn. Là sự đậm đà của 100% cà phê Arabica Cầu Đất rang vừa tới, biến tấu tinh tế với sữa đặc và kem sữa ngọt ngào cực quyến rũ. Càng hấp dẫn hơn với topping thạch 100% cà phê nguyên chất giúp giữ trọn vị ngon đến ngụm cuối cùng.', 'coffeeSuaDa.jpg', 1, 39000, 25000, '2023-01-08 15:29:11'),
 (2, 'Cà Phê Sữa Đá', 1, 'Sự độc đáo trong thưởng thức cà phê của người Việt    Cà phê phin kết hợp cùng sữa đặc là một sáng tạo đầy tự hào của người Việt, được xem món uống thương hiệu của Việt Nam.  Khi người Pháp đem văn hóa cà phê vào Việt Nam, người bản xứ thay thế sữa tươi đắt đỏ bằng sữa đặc rẻ tiền hơn để pha cùng cà phê. Tuy nhiên, bằng sự kết hợp hài hòa giữa các thái cực đắng – ngọt, bùi – béo, ly cà phê sữa đá lại sánh đặc và đậm đà hơn, không làm mất đi công dụng của cà phê mà bổ sung thêm năng lượng cho cơ thể từ sữa đã trở thành quen thuộc với nếp sống của người Việt và là một nét sáng tạo riêng, chinh phục được trái tim hàng triệu người yêu cà phê trên thế giới.', 'coffeeSuaTruyenThong.jpg', 25, 29000, NULL, '2022-12-07 16:25:12'),
 (3, 'Cà Phê Sữa Nóng', 1, 'Sự độc đáo trong thưởng thức cà phê của người Việt  Cà phê phin kết hợp cùng sữa đặc là một sáng tạo đầy tự hào của người Việt, được xem món uống thương hiệu của Việt Nam.  Khi người Pháp đem văn hóa cà phê vào Việt Nam, người bản xứ thay thế sữa tươi đắt đỏ bằng sữa đặc rẻ tiền hơn để pha cùng cà phê. Tuy nhiên, bằng sự kết hợp hài hòa giữa các thái cực đắng – ngọt, bùi – béo, ly cà phê sữa đá lại sánh đặc và đậm đà hơn, không làm mất đi công dụng của cà phê mà bổ sung thêm năng lượng cho cơ thể từ sữa đã trở thành quen thuộc với nếp sống của người Việt và là một nét sáng tạo riêng, chinh phục được trái tim hàng triệu người yêu cà phê trên thế giới.', 'coffeeSuaNong.jpg', 20, 35000, NULL, '2022-12-07 16:25:18'),
 (4, 'Bạc Sỉu', 1, 'Bạc sỉu – Nét văn hóa đầy tự hào của người Sài Gòn  Chính vị ngon của sữa trong 1 ly Bạc sỉu sẽ là thứ chinh phục bạn.  Nguồn gốc  Theo chân những người gốc Hoa đến định cư tại Sài Gòn, Bạc sỉu là cách gọi tắt của \"Bạc tẩy sỉu phé\" trong tiếng Quảng Đông. Bạc là \"trắng\". Tẩy là \"ly\". Sỉu là \"một chút\". Phé là \"cà phê\".  Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\".  Người lao động phổ thông khi xưa dùng sữa đặc pha với nước nóng để thay thế cho sữa tươi đắt đỏ trong thời điểm ấy. Tuy vậy, vị sữa đặc pha khá nồng, nên họ biến tấu chút cà phê vào cho ly sữa thêm thơm và hấp dẫn.  Người Sài Gòn \"chánh hiệu con mèo đen\" dùng Bạc sỉu nóng. Theo thời gian, người ta thêm đá vào ly “sữa cà phê” này để thưởng thức được cả trong những ngày oi bức.', 'coffeeBacSiu.jpg', 20, 29000, NULL, '2022-12-07 16:25:46'),
-(5, 'Bánh Mì Gậy Gà Kim Quất', 3, 'Croissant trứng muối thơm lừng, bên ngoài vỏ bánh giòn hấp dẫn bên trong trứng muối vị ngon khó cưỡng.', 'banhKimQuat.jpg', NULL, 25000, NULL, '2022-12-07 16:30:10'),
-(6, 'Bánh Mì VN Thịt Nguội', 3, 'Gói gọn trong ổ bánh mì Việt Nam là từng lớp chả, từng lớp jambon hòa quyện cùng bơ và pate thơm lừng, thêm dưa rau cho bữa sáng đầy năng lượng. *Phần bánh sẽ ngon và đậm đà nhất khi kèm pate. Để đảm bảo hương vị được trọn vẹn, Nhà mong bạn thông cảm vì không thể thay đổi định lượng pate.', 'banhMiVN.jpg', NULL, 35000, NULL, '2022-12-07 16:26:12'),
-(7, 'Bánh Mì Que Pate Cay', 3, 'Nguồn gốc thú vị của chiếc bánh mì que  Bánh mì que hay còn có tên gọi khác là bánh mì gậy) là một loại bánh mì Pháp xuất xứ từ nước Pháp (một số nguồn cho rằng loại bánh này có nguồn gốc nguyên thủy là ở vùng Torino của Ý). Có tên gọi như vậy chủ yếu là vì hình dạng thon dài của loại bánh này. Ở Việt Nam, bánh mì que lại nổi tiếng theo vùng, với mỗi vùng lại có hương vị đặc trưng riêng, nổi tiếng nhất là bánh mì que Hải Phòng & Đà Nẵng. Trong khi bánh mì que Hải Phòng thành phần chính là pate thì bánh mì que Đà Nẵng lại có thêm dăm bông, thịt nguội bên cạnh pate.      Hương vị bánh mì que Nhà  Tại The Coffee House, bánh mì là loại bánh mì gần giống hương vị bánh mì que Hải Phòng. Với thành phần chính chủ yếu là pate. Vỏ bánh mì giòn tan, kết hợp với lớp nhân pate béo béo đậm đà sẽ là lựa chọn lý tưởng nhẹ nhàng để lấp đầy chiếc bụng đói.', 'banhMiQueCay.jpg', NULL, 15000, NULL, '2022-12-07 16:26:44'),
-(8, 'Mochi Kem Phúc Bồn Tử', 3, ' Nguồn gốc Nhật Bản  Theo wikipedia, Mochi là một loại bánh giầy nhân ngọt truyền thống của Nhật Bản. Mochi được làm từ bột gạo nếp. Không chỉ để ăn, Mochi còn được xem như là vật phẩm dâng lên thần linh và có ý nghĩa may mắn. Người Nhật tin rằng khi ăn bánh Mochi nướng tại lễ Dondo-yaki sẽ mang lại sức khỏe cho suốt cả năm. Bánh Mochi cũng có mặt trong lễ dựng nhà mới Choto-shiki của người Nhật.     Bánh Mochi tại the Coffee House  Bao bọc bởi lớp vỏ Mochi dẻo thơm, bên trong là lớp kem lạnh cùng các loại nhân độc đáo, đa dạng như việt quất, dừa dứa, matcha, phúc bồn tử, xoài. Mochi được ra mắt cùng Trà sữa đúng gu. Sự kết hợp này đã nhận được sự ủng hộ yêu thích nhiệt tình ngay từ những ngày đầu ra mắt. Vị mohci thơm ngọt mát lạnh, kết hợp vị trà sữa béo đặc trưng của Nhà có thể khiến bạn yêu ngay từ lần thử đầu .', 'banhMoChiVietQuat.jpg', NULL, 19000, NULL, '2022-12-07 16:27:19'),
-(9, 'Hi-tea Trà Xoài', 5, 'Vị ngọt thanh, thơm phức từ xoài chín mọng kết hợp cùng vị chua đặc trưng của trà hoa Hibiscus tự nhiên, sẽ khiến bạn khó lòng quên được thức uống “chân ái” mùa hè này. Đặc biệt, topping Aloe Vera tự nhiên không chỉ nhâm nhi vui miệng mà còn giúp bạn “nâng tầm nhan sắc”.', 'hiTeaXoai.jpg', NULL, 55000, NULL, '2022-12-07 16:29:09'),
-(10, 'Hi-tea Trà Vải', 5, 'Sự kết hợp ăn ý giữa Đào cùng trà hoa Hibiscus, tạo nên tổng thể hài hoà dễ gây “thương nhớ” cho team thích món thanh mát, có vị chua nhẹ.', 'hiTeaVai.jpg', NULL, 59000, NULL, '2022-12-07 16:28:49');
+(5, 'Bánh Mì Gậy Gà Kim Quất', 3, 'Croissant trứng muối thơm lừng, bên ngoài vỏ bánh giòn hấp dẫn bên trong trứng muối vị ngon khó cưỡng.', 'banhKimQuat.jpg', 10, 25000, NULL, '2023-01-09 13:32:18'),
+(6, 'Bánh Mì VN Thịt Nguội', 3, 'Gói gọn trong ổ bánh mì Việt Nam là từng lớp chả, từng lớp jambon hòa quyện cùng bơ và pate thơm lừng, thêm dưa rau cho bữa sáng đầy năng lượng. *Phần bánh sẽ ngon và đậm đà nhất khi kèm pate. Để đảm bảo hương vị được trọn vẹn, Nhà mong bạn thông cảm vì không thể thay đổi định lượng pate.', 'banhMiVN.jpg', 1, 35000, NULL, '2023-01-09 13:32:22'),
+(7, 'Bánh Mì Que Pate Cay', 3, 'Nguồn gốc thú vị của chiếc bánh mì que  Bánh mì que hay còn có tên gọi khác là bánh mì gậy) là một loại bánh mì Pháp xuất xứ từ nước Pháp (một số nguồn cho rằng loại bánh này có nguồn gốc nguyên thủy là ở vùng Torino của Ý). Có tên gọi như vậy chủ yếu là vì hình dạng thon dài của loại bánh này. Ở Việt Nam, bánh mì que lại nổi tiếng theo vùng, với mỗi vùng lại có hương vị đặc trưng riêng, nổi tiếng nhất là bánh mì que Hải Phòng & Đà Nẵng. Trong khi bánh mì que Hải Phòng thành phần chính là pate thì bánh mì que Đà Nẵng lại có thêm dăm bông, thịt nguội bên cạnh pate.      Hương vị bánh mì que Nhà  Tại The Coffee House, bánh mì là loại bánh mì gần giống hương vị bánh mì que Hải Phòng. Với thành phần chính chủ yếu là pate. Vỏ bánh mì giòn tan, kết hợp với lớp nhân pate béo béo đậm đà sẽ là lựa chọn lý tưởng nhẹ nhàng để lấp đầy chiếc bụng đói.', 'banhMiQueCay.jpg', 1, 15000, NULL, '2023-01-09 13:32:23'),
+(8, 'Mochi Kem Phúc Bồn Tử', 3, ' Nguồn gốc Nhật Bản  Theo wikipedia, Mochi là một loại bánh giầy nhân ngọt truyền thống của Nhật Bản. Mochi được làm từ bột gạo nếp. Không chỉ để ăn, Mochi còn được xem như là vật phẩm dâng lên thần linh và có ý nghĩa may mắn. Người Nhật tin rằng khi ăn bánh Mochi nướng tại lễ Dondo-yaki sẽ mang lại sức khỏe cho suốt cả năm. Bánh Mochi cũng có mặt trong lễ dựng nhà mới Choto-shiki của người Nhật.     Bánh Mochi tại the Coffee House  Bao bọc bởi lớp vỏ Mochi dẻo thơm, bên trong là lớp kem lạnh cùng các loại nhân độc đáo, đa dạng như việt quất, dừa dứa, matcha, phúc bồn tử, xoài. Mochi được ra mắt cùng Trà sữa đúng gu. Sự kết hợp này đã nhận được sự ủng hộ yêu thích nhiệt tình ngay từ những ngày đầu ra mắt. Vị mohci thơm ngọt mát lạnh, kết hợp vị trà sữa béo đặc trưng của Nhà có thể khiến bạn yêu ngay từ lần thử đầu .', 'banhMoChiVietQuat.jpg', 1, 19000, NULL, '2023-01-09 13:32:24'),
+(9, 'Hi-tea Trà Xoài', 5, 'Vị ngọt thanh, thơm phức từ xoài chín mọng kết hợp cùng vị chua đặc trưng của trà hoa Hibiscus tự nhiên, sẽ khiến bạn khó lòng quên được thức uống “chân ái” mùa hè này. Đặc biệt, topping Aloe Vera tự nhiên không chỉ nhâm nhi vui miệng mà còn giúp bạn “nâng tầm nhan sắc”.', 'hiTeaXoai.jpg', 1, 55000, NULL, '2023-01-09 13:32:24'),
+(10, 'Hi-tea Trà Vải', 5, 'Sự kết hợp ăn ý giữa Đào cùng trà hoa Hibiscus, tạo nên tổng thể hài hoà dễ gây “thương nhớ” cho team thích món thanh mát, có vị chua nhẹ.', 'hiTeaVai.jpg', 1, 59000, NULL, '2023-01-09 13:32:26');
 
 -- --------------------------------------------------------
 
@@ -215,14 +201,7 @@ CREATE TABLE `review` (
   `title` varchar(50) NOT NULL DEFAULT '',
   `content` text DEFAULT '0',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `review`
---
-
-INSERT INTO `review` (`review_id`, `product_id`, `user_id`, `title`, `content`, `updated_at`) VALUES
-(1, 4, 1, 'Sản phẩm tốt', 'Giá phù hợp nhiều người dùng', '2022-12-07 11:12:23');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -235,22 +214,21 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `avatar` varchar(50) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `verify_code` int(11) DEFAULT NULL,
+  `active` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `phone`, `address`, `updated_at`) VALUES
-(1, 'huylg2109@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Huy', '0855994282', 'Hồ Chí Minh', '2022-12-08 18:35:22'),
-(3, 'hau.nguyenbk19@hcmut.edu.vn', '25f9e794323b453885f5181f1b624d0b', 'Hậu', '0382848786', 'Hồ Chí Minh', '2022-12-07 11:03:15'),
-(4, 'huan@gmail.com', '245605689b9e8d33744686a86819040b', 'Huan Nguyen', '0457237111', 'Đà Lạt', '2022-12-08 21:17:15'),
-(5, 'duc@gmail.com', '1bbd886460827015e5d605ed44252251', 'Duc Nguyen', '0293247821', 'Rạch Giá', '2022-12-08 18:34:55'),
-(6, 'vinh@gmail.com', '1bbd886460827015e5d605ed44252251', 'Vinh', '0293247821', 'Bến Tre', '2022-12-08 19:10:57'),
-(7, 'quan@gmail.com', '1bbd886460827015e5d605ed44252251', 'Quân', '0293437821', 'An Giang', '2022-12-08 19:12:44');
+INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `avatar`, `phone`, `address`, `updated_at`, `verify_code`, `active`) VALUES
+(31, 'hau.nguyenbk8786@gmail.com', '53a627fac6f4700e04f4d9508fab393a', 'Nguyễn Đức Hậu', NULL, '0382848786', 'Kí túc xá Khu B, Đông Hòa, Dĩ An, Bình Dương', '2023-01-27 03:01:57', 111127377, 1),
+(34, 'hau.nguyenbk19@hcmut.edu.vn', '43fb750eedc948a953f1985ed3bbdd55', 'GunKK', NULL, '0382848786', 'Kí túc xá Khu B, Đông Hòa, Dĩ An, Bình Dương', '2023-01-27 03:05:41', 181030442, 1);
 
 --
 -- Indexes for dumped tables
@@ -341,7 +319,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -359,13 +337,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
