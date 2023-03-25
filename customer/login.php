@@ -67,6 +67,17 @@ if (isset($_POST['login_user'])) {
       }
       else $tb = 'Sai email hoặc mật khẩu'; 
     }
+    if ($email == "" || $password == "") {
+      $is_validated = false;
+      $tb = "Vui lòng nhập các ô còn thiếu";
+    }
+    if ($is_validated) {
+    $_SESSION["email_user"] = $email;
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
+      header('location: check_out.php');
+    else
+      header('location: my_account.php');
+    }
 }
 ?>
 <div class="row d-flex justify-content-center align-items-center h-100">
